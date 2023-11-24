@@ -3,6 +3,10 @@ import Footer from "../../../Components/Footer/Footer";
 import { GiHamburgerMenu } from "react-icons/gi";
 import useAdmin from "../../../Hook/useAdmin";
 import useManager from "../../../Hook/useManager";
+import { FaHome, FaMoneyBill } from "react-icons/fa";
+import { MdOutlineCollections, MdProductionQuantityLimits } from "react-icons/md";
+import { IoBagCheckOutline } from "react-icons/io5";
+import { TbListDetails } from "react-icons/tb";
 
 
 const Dashboard = () => {
@@ -27,75 +31,84 @@ const Dashboard = () => {
                                     switch (true) {
                                         case isAdmin:
                                             return <>
-                                            <p className="text-4xl">Admin</p>
-                                            <li><NavLink
-                                                to="/dashboard/manageShop"
-                                                className={({ isActive, isPending }) =>
-                                                    isPending ? "pending" : isActive ? "active" : ""
-                                                }
-                                            >
-                                                Manage Shop
-                                            </NavLink></li>
-                                            <li><NavLink
-                                                to="/dashboard/saleSummery"
-                                                className={({ isActive, isPending }) =>
-                                                    isPending ? "pending" : isActive ? "active" : ""
-                                                }
-                                            >
-                                                Sale Summery
-                                            </NavLink></li>
-                                            <li><NavLink
-                                                to="/"
-                                                className={({ isActive, isPending }) =>
-                                                    isPending ? "pending" : isActive ? "active" : ""
-                                                }
-                                            >
-                                                Home
-                                            </NavLink></li>
-                                        </>;
+                                                <p className="text-4xl">Admin</p>
+                                                <li><NavLink
+                                                    to="/dashboard/manageShop"
+                                                    className={({ isActive, isPending }) =>
+                                                        isPending ? "pending" : isActive ? "active" : ""
+                                                    }
+                                                >
+                                                    Manage Shop
+                                                </NavLink></li>
+                                                <li><NavLink
+                                                    to="/dashboard/saleSummery"
+                                                    className={({ isActive, isPending }) =>
+                                                        isPending ? "pending" : isActive ? "active" : ""
+                                                    }
+                                                >
+                                                    Sale Summery
+                                                </NavLink></li>
+                                            </>;
                                         case isManager:
-                                            return  <>
-                                            <p className="text-4xl">Manager</p>
-                                            <li><NavLink
-                                                to="/dashboard/allUsers"
-                                                className={({ isActive, isPending }) =>
-                                                    isPending ? "pending" : isActive ? "active" : ""
-                                                }
-                                            >
-                                                All User
-                                            </NavLink></li>
-                                            <li><NavLink
-                                                to="/createStore"
-                                                className={({ isActive, isPending }) =>
-                                                    isPending ? "pending" : isActive ? "active" : ""
-                                                }
-                                            >
-                                                Create Store
-                                            </NavLink></li>
-                                            <li><NavLink
-                                                to="/watchDemo"
-                                                className={({ isActive, isPending }) =>
-                                                    isPending ? "pending" : isActive ? "active" : ""
-                                                }
-                                            >
-                                                Watch Demo
-                                            </NavLink></li>
-                                        </>;
+                                            return <>
+                                                <p className="text-4xl">Manager</p>
+                                                <li><NavLink
+                                                    to="/dashboard/productManagement"
+                                                    className={({ isActive, isPending }) =>
+                                                        isPending ? "pending" : isActive ? "active" : ""
+                                                    }
+                                                >
+                                                  <MdProductionQuantityLimits />  Product Management
+                                                </NavLink></li>
+                                                <li><NavLink
+                                                    to="/dashboard/salesCollection"
+                                                    className={({ isActive, isPending }) =>
+                                                        isPending ? "pending" : isActive ? "active" : ""
+                                                    }
+                                                >
+                                                   <MdOutlineCollections></MdOutlineCollections> Sales Collection
+                                                </NavLink></li>
+                                                <li><NavLink
+                                                    to="/dashboard/checkOut"
+                                                    className={({ isActive, isPending }) =>
+                                                        isPending ? "pending" : isActive ? "active" : ""
+                                                    }
+                                                >
+                                                    <IoBagCheckOutline />Check Out
+                                                </NavLink></li>
+                                                <li><NavLink
+                                                    to="/dashboard/subscriptionAndPayment"
+                                                    className={({ isActive, isPending }) =>
+                                                        isPending ? "pending" : isActive ? "active" : ""
+                                                    }
+                                                >
+                                                   <FaMoneyBill /> Subscription & Payment
+                                                </NavLink></li>
+                                                <li><NavLink
+                                                    to="/dashboard/salesSummary"
+                                                    className={({ isActive, isPending }) =>
+                                                        isPending ? "pending" : isActive ? "active" : ""
+                                                    }
+                                                >
+                                                   <TbListDetails /> Sales Summery
+                                                </NavLink></li>
+                                            </>;
                                         default:
                                             return <div>
-                                                 <p className="text-4xl">user</p>
-                                                 <NavLink
-                                                to="/"
-                                                className={({ isActive, isPending }) =>
-                                                    isPending ? "pending" : isActive ? "active" : ""
-                                                }
-                                            >
-                                                Home
-                                            </NavLink>
+                                                <p className="text-4xl">user</p>
                                             </div>;
                                     }
                                 })()
                             }
+                            <div className="divider"></div>
+                            <li className="text-xl"><NavLink
+                                to="/"
+                                className={({ isActive, isPending }) =>
+                                    isPending ? "pending" : isActive ? "active" : ""
+                                }
+                            >
+                               <FaHome></FaHome> Home
+                            </NavLink></li>
                         </ul>
 
                     </div>

@@ -18,6 +18,11 @@ import AllUsers from './Pages/Dashboard/AllUsers/AllUsers';
 import ManageShop from './Pages/Dashboard/ManageShop/ManageShop';
 import SaleSummary from './Pages/Dashboard/SaleSummary/SaleSummary';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
+import ProductManagement from './Pages/Dashboard/ProductManagement/ProductManagement';
+import SalesCollection from './Pages/Dashboard/SalesCollection/SalesCollection';
+import CheckOut from './Pages/Dashboard/CheckOut/CheckOut';
+import SubscriptionAndPayment from './Pages/Dashboard/SubscriptionAndPayment/SubscriptionAndPayment';
+import SalesSummary from './Pages/Dashboard/SalesSummary/SalesSummary';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -64,6 +69,28 @@ const router = createBrowserRouter([
       {
         path: "saleSummery",
         element: <SaleSummary></SaleSummary>
+      },
+
+      // manager related 
+      {
+        path : "productManagement",
+        element : <ProductManagement></ProductManagement>
+      },
+      {
+        path : "salesCollection",
+        element : <SalesCollection></SalesCollection>
+      },
+      {
+        path : "checkOut",
+        element : <CheckOut></CheckOut>
+      },
+      {
+        path : "subscriptionAndPayment",
+        element : <SubscriptionAndPayment></SubscriptionAndPayment>
+      },
+      {
+        path : "salesSummary",
+        element : <SalesSummary></SalesSummary>
       }
     ]
   }
