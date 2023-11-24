@@ -23,6 +23,7 @@ import SalesCollection from './Pages/Dashboard/SalesCollection/SalesCollection';
 import CheckOut from './Pages/Dashboard/CheckOut/CheckOut';
 import SubscriptionAndPayment from './Pages/Dashboard/SubscriptionAndPayment/SubscriptionAndPayment';
 import SalesSummary from './Pages/Dashboard/SalesSummary/SalesSummary';
+import AddProduct from './Pages/Dashboard/ProductManagement/AddProduct';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -75,6 +76,10 @@ const router = createBrowserRouter([
       {
         path : "productManagement",
         element : <ProductManagement></ProductManagement>
+      },
+      {
+        path :"addProduct",
+        element : <AddProduct></AddProduct>
       },
       {
         path : "salesCollection",
