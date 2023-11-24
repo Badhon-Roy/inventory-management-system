@@ -35,7 +35,7 @@ const AddProduct = () => {
         data.profitMargin = parseFloat(data.profitMargin);
         data.discount = parseFloat(data.discount);
         const textPercentage = 7.5;
-        const SellingPrice = data.productionCost + (data.productionCost * textPercentage / 100)  + (data.productionCost * data.profitMargin /100)
+        const SellingPrice =(data.productionCost + (data.productionCost * textPercentage / 100)  + (data.productionCost * data.profitMargin /100)).toFixed(2);
         const imageFile = { image: data.image[0] }
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
@@ -56,7 +56,7 @@ const AddProduct = () => {
                 date : formateDate,
                 shop_id , shop_name ,
                 sale_count : 0,
-                selling_price : SellingPrice,
+                selling_price : parseFloat(SellingPrice),
                 name : user?.displayName ,
                 email : user?.email
                 

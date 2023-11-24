@@ -115,7 +115,7 @@ const ProductManagement = () => {
                                             </td>
                                             <td>{item?.sale_count}</td>
                                             <th>
-                                                <Link to='/dashboard/updateProduct'>
+                                                <Link to={`/dashboard/updateProduct/${item._id}`}>
                                                     <button className="btn text-2xl btn-ghost btn-xs"><FaEdit></FaEdit></button></Link>
                                             </th>
                                             <th>

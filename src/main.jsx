@@ -83,7 +83,7 @@ const router = createBrowserRouter([
         element : <AddProduct></AddProduct>
       },
       {
-        path : "updateProduct",
+        path : "updateProduct/:id",
         element : <UpdateProduct></UpdateProduct>
       }
       ,
@@ -92,7 +92,7 @@ const router = createBrowserRouter([
         element : <SalesCollection></SalesCollection>
       },
       {
-        path : "checkOut",
+        path : "checkOut/:id",
         element : <CheckOut></CheckOut>
       },
       {
