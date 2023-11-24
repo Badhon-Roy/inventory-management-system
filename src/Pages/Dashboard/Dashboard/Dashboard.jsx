@@ -2,11 +2,12 @@ import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../../../Components/Footer/Footer";
 import { GiHamburgerMenu } from "react-icons/gi";
 import useAdmin from "../../../Hook/useAdmin";
+import useManager from "../../../Hook/useManager";
 
 
 const Dashboard = () => {
-    const [isAdmin] = useAdmin() ;
-    console.log(isAdmin);
+    const [isAdmin] = useAdmin();
+    const [isManager] = useManager()
     return (
         <div className="max-w-[1600px] mx-auto lg:px-16 md:px-8">
             <div style={{ height: 'calc(100vh - 178px)' }}>
@@ -21,65 +22,80 @@ const Dashboard = () => {
                     <div className="drawer-side">
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
                         <ul style={{ height: 'calc(100vh - 178px)' }} className="menu py-16 px-4 md:px-8 md:w-80  bg-base-200 text-base-content">
-
                             {
-                                isAdmin ? <>
-                                <p className="text-4xl">Admin</p>
-                                    <li><NavLink
-                                        to="/dashboard/manageShop"
-                                        className={({ isActive, isPending }) =>
-                                            isPending ? "pending" : isActive ? "active" : ""
-                                        }
-                                    >
-                                        Manage Shop
-                                    </NavLink></li>
-                                    <li><NavLink
-                                        to="/dashboard/saleSummery"
-                                        className={({ isActive, isPending }) =>
-                                            isPending ? "pending" : isActive ? "active" : ""
-                                        }
-                                    >
-                                        Sale Summery
-                                    </NavLink></li>
-                                    <li><NavLink
-                                        to="/"
-                                        className={({ isActive, isPending }) =>
-                                            isPending ? "pending" : isActive ? "active" : ""
-                                        }
-                                    >
-                                        Home
-                                    </NavLink></li>
-                                </> :
-                                    <>
-                                    <p className="text-4xl">User</p>
-                                        <li><NavLink
-                                            to="/dashboard/allUsers"
-                                            className={({ isActive, isPending }) =>
-                                                isPending ? "pending" : isActive ? "active" : ""
-                                            }
-                                        >
-                                            All User
-                                        </NavLink></li>
-                                        <li><NavLink
-                                            to="/createStore"
-                                            className={({ isActive, isPending }) =>
-                                                isPending ? "pending" : isActive ? "active" : ""
-                                            }
-                                        >
-                                            Create Store
-                                        </NavLink></li>
-                                        <li><NavLink
-                                            to="/watchDemo"
-                                            className={({ isActive, isPending }) =>
-                                                isPending ? "pending" : isActive ? "active" : ""
-                                            }
-                                        >
-                                            Watch Demo
-                                        </NavLink></li>
-                                    </>
+                                (() => {
+                                    switch (true) {
+                                        case isAdmin:
+                                            return <>
+                                            <p className="text-4xl">Admin</p>
+                                            <li><NavLink
+                                                to="/dashboard/manageShop"
+                                                className={({ isActive, isPending }) =>
+                                                    isPending ? "pending" : isActive ? "active" : ""
+                                                }
+                                            >
+                                                Manage Shop
+                                            </NavLink></li>
+                                            <li><NavLink
+                                                to="/dashboard/saleSummery"
+                                                className={({ isActive, isPending }) =>
+                                                    isPending ? "pending" : isActive ? "active" : ""
+                                                }
+                                            >
+                                                Sale Summery
+                                            </NavLink></li>
+                                            <li><NavLink
+                                                to="/"
+                                                className={({ isActive, isPending }) =>
+                                                    isPending ? "pending" : isActive ? "active" : ""
+                                                }
+                                            >
+                                                Home
+                                            </NavLink></li>
+                                        </>;
+                                        case isManager:
+                                            return  <>
+                                            <p className="text-4xl">Manager</p>
+                                            <li><NavLink
+                                                to="/dashboard/allUsers"
+                                                className={({ isActive, isPending }) =>
+                                                    isPending ? "pending" : isActive ? "active" : ""
+                                                }
+                                            >
+                                                All User
+                                            </NavLink></li>
+                                            <li><NavLink
+                                                to="/createStore"
+                                                className={({ isActive, isPending }) =>
+                                                    isPending ? "pending" : isActive ? "active" : ""
+                                                }
+                                            >
+                                                Create Store
+                                            </NavLink></li>
+                                            <li><NavLink
+                                                to="/watchDemo"
+                                                className={({ isActive, isPending }) =>
+                                                    isPending ? "pending" : isActive ? "active" : ""
+                                                }
+                                            >
+                                                Watch Demo
+                                            </NavLink></li>
+                                        </>;
+                                        default:
+                                            return <div>
+                                                 <p className="text-4xl">user</p>
+                                                 <NavLink
+                                                to="/"
+                                                className={({ isActive, isPending }) =>
+                                                    isPending ? "pending" : isActive ? "active" : ""
+                                                }
+                                            >
+                                                Home
+                                            </NavLink>
+                                            </div>;
+                                    }
+                                })()
                             }
-
-
                         </ul>
 
                     </div>

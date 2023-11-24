@@ -4,13 +4,15 @@ import { BsDot } from "react-icons/bs"
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
+import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
 
 const CreateStore = () => {
+    const axiosSecure = useAxiosSecure()
     const { user } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
-        console.log(data);
+        console.log( user._id);
         axios.post('http://localhost:5000/shops', data)
             .then(res => {
                 console.log(res.data);
@@ -28,6 +30,21 @@ const CreateStore = () => {
             .catch(error => {
                 console.log(error.massage);
             })
+
+        axiosSecure.patch(`/users/manager/${user?.email}`)
+        .then(res =>{
+            console.log(res.data)
+            if(res.data.modifiedCount > 0){
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: `${user.displayName} is an Manager Now!`,
+                    showConfirmButton: false,
+                    timer: 1500
+                  });
+            }
+        })
+        
     };
     return (
         <div className="p-8 md:mx-0 mx-2 my-16 shadow-lg border">
