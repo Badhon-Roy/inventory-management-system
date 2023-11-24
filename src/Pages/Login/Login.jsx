@@ -4,12 +4,16 @@ import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import swal from "sweetalert";
 import { AuthContext } from '../../AuthProvider/AuthProvider';
+import useAxiosPublic from '../../Hook/useAxiosPublic';
 
 const Login = () => {
+    const axiosPublic = useAxiosPublic();
     const [errorMassage, setErrorMassage] = useState(null)
     const [showPassword, setShowPassword] = useState(false)
     const location = useLocation()
     const navigate = useNavigate()
+
+    const from = location.state?.from?.pathname || "/";
 
     const { googleSignIn, signIn } = useContext(AuthContext)
     const handleLogin = e => {
@@ -19,22 +23,28 @@ const Login = () => {
         signIn(email, password)
             .then(res => {
                 console.log(res.user);
-                navigate(location?.state ? location.state : '/')
+                // navigate(location?.state ? location.state : '/')
+                navigate(from, { replace: true });
                 swal("Log in", "successful", "success")
                 e.target.reset();
             })
             .catch(() => {
                 setErrorMassage('login failed please check your email and password and try again');
             })
-            
+
 
     }
     const handleGoogleLogin = () => {
         googleSignIn()
             .then(res => {
-                console.log(res.user);
-                navigate(location?.state ? location.state : '/')
-                swal("Log in", "successful", "success")
+                const userInfo = { name: res.user?.displayName, email: res.user?.email }
+                axiosPublic.post('/users', userInfo)
+                    .then(res => {
+                        console.log(res.data , "google login successful");
+                        // navigate(location?.state ? location.state : '/')
+                        navigate(from, { replace: true });
+                        swal("Log in", "successful", "success")
+                    })
             })
             .catch(error => {
                 console.log(error);

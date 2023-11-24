@@ -1,14 +1,17 @@
 
-import swal from 'sweetalert';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { useContext, useState } from 'react';
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
+import useAxiosPublic from '../../Hook/useAxiosPublic';
+import Swal from 'sweetalert2';
 
 const SignUp = () => {
+    const axiosPublic = useAxiosPublic()
     const { createUser, userProfile } = useContext(AuthContext)
     const [errorMassage, setErrorMassage] = useState('')
     const [showPassword, setShowPassword] = useState(false)
+    const from = location.state?.from?.pathname || "/";
     const navigate = useNavigate()
     const handleRegister = e => {
         e.preventDefault()
@@ -38,23 +41,31 @@ const SignUp = () => {
 
         createUser(email, password)
             .then(res => {
+                console.log(res.user);
                 userProfile(name, image)
-                    .then(res => {
-                        console.log(res.user);
+                    .then(() => {
+                        const userInfo = { name: name,email: email}
+                        axiosPublic.post('/users', userInfo)
+                            .then(res => {
+                                if (res.data.insertedId) {
+                                    Swal.fire({
+                                        position: 'top-end',
+                                        icon: 'success',
+                                        title: 'User created successfully.',
+                                        showConfirmButton: false,
+                                        timer: 1500
+                                    });
+                                    window.location.reload()
+                                    // navigate(location?.state ? location.state : '/')
+                                    navigate(from, { replace: true });
+                                }
+                            })
                     })
                     .catch(error => {
-                        console.log(error);
+                        setErrorMassage(error.message)
                     })
-                console.log(res.user);
-                navigate(location?.state ? location.state : '/')
-                swal("Good job", "Register successful", "success").then(()=>{
-                    window.location.reload();
+            })
 
-                })
-            })
-            .catch(error => {
-                setErrorMassage(error.message)
-            })
     }
 
 
