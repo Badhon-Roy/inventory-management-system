@@ -3,13 +3,29 @@ import useAxiosPublic from "../../../Hook/useAxiosPublic";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import Swal from "sweetalert2";
 import { useNavigate } from "react-router-dom";
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import { useQuery } from "@tanstack/react-query";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const AddProduct = () => {
+    const currentDate = new Date()
+    const formateDate = currentDate.toLocaleDateString()
+    const {user} = useContext(AuthContext)
     const axiosPublic = useAxiosPublic()
     const axiosSecure = useAxiosSecure();
+    const {data} = useQuery({
+        queryKey : ['shop_name' , user?.email],
+        queryFn : async ()=>{
+
+            const res = await axiosSecure(`/shops?shop_owner_email=${user.email}`)
+            return res.data;
+        }
+    })
+    const shop_id = data?._id
+    const shop_name = data?.shop_name
     const navigate = useNavigate()
     const { register, handleSubmit, formState: { errors } } = useForm();
 
@@ -18,6 +34,8 @@ const AddProduct = () => {
         data.productionCost = parseFloat(data.productionCost);
         data.profitMargin = parseFloat(data.profitMargin);
         data.discount = parseFloat(data.discount);
+        const textPercentage = 7.5;
+        const SellingPrice = data.productionCost + (data.productionCost * textPercentage / 100)  + (data.productionCost * data.profitMargin /100)
         const imageFile = { image: data.image[0] }
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
@@ -34,7 +52,14 @@ const AddProduct = () => {
                 cost : data.productionCost,
                 profit_margin : data.profitMargin,
                 discount : data.discount,
-                description : data.productDescription
+                description : data.productDescription,
+                date : formateDate,
+                shop_id , shop_name ,
+                sale_count : 0,
+                selling_price : SellingPrice,
+                name : user?.displayName ,
+                email : user?.email
+                
             }
             axiosSecure.post('/products', productInfo)
             .then(res =>
