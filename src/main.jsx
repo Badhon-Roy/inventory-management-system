@@ -14,6 +14,7 @@ import AuthProvider from './AuthProvider/AuthProvider';
 import SignUp from './Pages/SignUp/SignUp';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
+import AllUsers from './Pages/Dashboard/AllUsers/AllUsers';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -38,13 +39,19 @@ const router = createBrowserRouter([
       {
         path : "/signUp",
         element : <SignUp></SignUp>
-      },
-      {
-        path : "/dashboard",
-        element : <Dashboard></Dashboard>
       }
     ]
   },
+  {
+    path : "/dashboard",
+    element : <Dashboard></Dashboard>,
+    children : [
+      {
+        path : "allUsers",
+        element : <AllUsers></AllUsers>
+      }
+    ]
+  }
 ]);
 
 ReactDOM.createRoot(document.getElementById('root')).render(

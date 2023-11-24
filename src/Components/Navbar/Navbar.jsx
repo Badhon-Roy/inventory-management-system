@@ -1,4 +1,4 @@
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logoImg from "../../assets/images/logo1-removebg-preview.png"
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
@@ -38,9 +38,9 @@ const Navbar = () => {
                         <li><a>Item 3</a></li>
                     </ul>
                 </div>
-                <a className="btn btn-ghost text-xl">
-                    <img className="w-2/3" src={logoImg} alt="" />
-                </a>
+                <Link to="/" className="ml-4">
+                    <img className="" src={logoImg} alt="" />
+                </Link>
             </div>
             <div className="navbar-center hidden lg:flex">
                 <ul className="flex gap-10 text-xl font-bold">
@@ -90,7 +90,7 @@ const Navbar = () => {
                                         <img src={user?.photoURL} />
                                     </div>
                                 </div>
-                                <h2>{user?.displayName}</h2>
+                                <h2 className="md:block hidden">{user?.displayName}</h2>
                             </label>
                             <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-52">
                                 <li className="text-xl font-medium">{user?.displayName}</li>

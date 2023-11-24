@@ -2,16 +2,35 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { BsDot } from "react-icons/bs"
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import axios from "axios";
+import Swal from "sweetalert2";
 
 
 const CreateStore = () => {
-    const {user} = useContext(AuthContext)
+    const { user } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
         console.log(data);
+        axios.post('http://localhost:5000/shops', data)
+            .then(res => {
+                console.log(res.data);
+                if (res.data.insertedId) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: "Create store successful.",
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                    reset()
+                }
+            })
+            .catch(error => {
+                console.log(error.massage);
+            })
     };
     return (
-        <div className="p-8 my-16 shadow-lg border">
+        <div className="p-8 md:mx-0 mx-2 my-16 shadow-lg border">
             <h2 className="md:text-4xl text-2xl my-8 font-bold text-center underline">Create Store</h2>
 
 
@@ -64,7 +83,7 @@ const CreateStore = () => {
                         {errors.shop_location && <span className="text-red-600 flex items-center"><BsDot></BsDot> This field is required</span>}
                     </div>
                 </div>
-                
+
 
                 <input className="btn btn-block mt-5 bg-blue-500 normal-case hover:bg-blue-700 text-xlt text-white text-xl" type="submit" value="Create Store" />
             </form>
