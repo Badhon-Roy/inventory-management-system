@@ -2,7 +2,6 @@ import { useContext } from "react";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
 
 const SalesCollection = () => {
     const axiosSecure = useAxiosSecure()
@@ -19,6 +18,34 @@ const SalesCollection = () => {
             <span className="loading loading-spinner loading-lg"></span>
         </div>
     }
+    const handleAdd = (item) => {
+        const checkOutInfo = {
+            product_id: item?._id,
+            product_name: item?.product_name,
+            product_image: item?.product_image,
+            quantity: item?.quantity,
+            product_location: item?.product_location,
+            cost: item?.cost,
+            profit_margin: item?.profit_margin || 0,
+            discount: item?.discount || 0,
+            description: item?.description,
+            date: item?.date,
+            shop_id: item?.shop_id,
+            shop_name: item?.shop_name,
+            sale_count: item?.sale_count,
+            selling_price: item?.selling_price,
+            name: item?.name,
+            email: item?.email,
+        }
+        axiosSecure.post('/checkOut', checkOutInfo)
+            .then(res => {
+                console.log(res.data);
+            })
+    }
+
+
+
+
     return (
         <div>
             <h2>THis is sales collection {data?.length} </h2>
@@ -71,8 +98,7 @@ const SalesCollection = () => {
                                                 <td>{item?.discount}%</td>
                                                 <td>{item?.selling_price}</td>
                                                 <th>
-                                                    <Link to={`/dashboard/checkOut/${item._id}`}>
-                                                        <button className="btn text-xl btn-ghost ">Sold to Customer</button></Link>
+                                                    <button onClick={() => handleAdd(item)} className="BTN">Add For Check-out</button>
                                                 </th>
                                             </tr>)
                                     }

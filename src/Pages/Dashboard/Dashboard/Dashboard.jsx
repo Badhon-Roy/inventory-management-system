@@ -5,7 +5,7 @@ import useAdmin from "../../../Hook/useAdmin";
 import useManager from "../../../Hook/useManager";
 import { FaHome, FaMoneyBill } from "react-icons/fa";
 import { MdOutlineCollections, MdProductionQuantityLimits } from "react-icons/md";
-// import { IoBagCheckOutline } from "react-icons/io5";
+import { IoBagCheckOutline } from "react-icons/io5";
 import { TbListDetails } from "react-icons/tb";
 
 
@@ -68,14 +68,14 @@ const Dashboard = () => {
                                                 >
                                                    <MdOutlineCollections></MdOutlineCollections> Sales Collection
                                                 </NavLink></li>
-                                                {/* <li><NavLink
+                                                <li><NavLink
                                                     to="/dashboard/checkOut"
                                                     className={({ isActive, isPending }) =>
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
                                                 >
                                                     <IoBagCheckOutline />Check Out
-                                                </NavLink></li> */}
+                                                </NavLink></li>
                                                 <li><NavLink
                                                     to="/dashboard/subscriptionAndPayment"
                                                     className={({ isActive, isPending }) =>

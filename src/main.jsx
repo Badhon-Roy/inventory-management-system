@@ -98,7 +98,7 @@ const router = createBrowserRouter([
         element : <SalesCollection></SalesCollection>
       },
       {
-        path : "checkOut/:id",
+        path : "checkOut",
         element : <CheckOut></CheckOut>
       },
       {

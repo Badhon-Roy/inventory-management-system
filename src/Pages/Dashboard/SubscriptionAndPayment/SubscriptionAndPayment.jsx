@@ -29,7 +29,7 @@ const SubscriptionAndPayment = () => {
                         <h2>Increase the product limit to {offer?.limit} .</h2>
                         <h2>Pay ${offer?.pay}</h2>
                         <Link to={`/dashboard/payment/${offer?._id}`}>
-                            <button className="btn btn-sm btn-primary">Pay</button>
+                            <button className="BTN">Pay</button>
                         </Link>
 
                     </div>

@@ -111,7 +111,7 @@ const CreateStore = () => {
                 </div>
 
 
-                <input className="btn btn-block mt-5 bg-blue-500 normal-case hover:bg-blue-700 text-xlt text-white text-xl" type="submit" value="Create Store" />
+                <input className="BTN w-full" type="submit" value="Create Store" />
             </form>
         </div>
     );

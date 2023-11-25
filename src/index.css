@@ -1,3 +1,31 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+@import url('https://fonts.googleapis.com/css2?family=IBM+Plex+Sans:wght@300;400;500;600;700&display=swap');
+body{
+    font-family: 'IBM Plex Sans', sans-serif;
+}
+.text-color{
+    color: #ff792e;
+}
+.bg-color{
+    background: #ff792e;
+}
+
+.BTN{
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    cursor: pointer;
+    color: #fff;
+    background: linear-gradient(to right, #1b2950, #42578f);
+    border-radius: 5px;
+    cursor: pointer;
+    
+}
+.BTN:hover{
+    background: linear-gradient(to right, #ff792e, #ffbc96);
+}

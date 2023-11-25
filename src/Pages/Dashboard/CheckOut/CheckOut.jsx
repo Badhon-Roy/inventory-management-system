@@ -53,7 +53,7 @@ const CheckOut = () => {
                 </div>
                 <h2>{data?.product_name}</h2>
             </div>
-            <button onClick={handleSales} className="btn btn-primary mt-3">Get Paid</button>
+            <button onClick={handleSales} className="BTN mt-3">Get Paid</button>
         </div>
     );
 };

@@ -66,16 +66,16 @@ const ProductManagement = () => {
                     <h2 className="text-xl font-bold ml-6">Total {data?.length} product added</h2>
                     {
                         data?.length >= limit ? <Link to="/dashboard/subscriptionAndPayment">
-                        <button className="btn rounded-none btn-primary">Add Product</button>
+                        <button className="BTN">Add Product</button>
                     </Link> : <Link to="/dashboard/addProduct">
-                        <button className="btn rounded-none btn-primary">Add Product</button>
+                        <button className="BTN">Add Product</button>
                     </Link>
                     }
                 </div> : <div>
                     <h2 className="text-center mb-2 text-xl font-bold">You do not have any product.</h2>
                     <div className="flex justify-center">
                         <Link to="/dashboard/addProduct">
-                            <button className="btn rounded-none btn-primary">Add Product</button>
+                            <button className="BTN">Add Product</button>
                         </Link>
                     </div>
                 </div>
