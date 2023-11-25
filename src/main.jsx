@@ -25,6 +25,7 @@ import SubscriptionAndPayment from './Pages/Dashboard/SubscriptionAndPayment/Sub
 import SalesSummary from './Pages/Dashboard/SalesSummary/SalesSummary';
 import AddProduct from './Pages/Dashboard/ProductManagement/AddProduct';
 import UpdateProduct from './Pages/Dashboard/ProductManagement/UpdateProduct';
+import Payment from './Pages/Dashboard/Payment/Payment';
 const router = createBrowserRouter([
   {
     path: "/",
@@ -85,6 +86,11 @@ const router = createBrowserRouter([
       {
         path : "updateProduct/:id",
         element : <UpdateProduct></UpdateProduct>
+      }
+      ,
+      {
+        path : "payment/:id",
+        element : <Payment></Payment>
       }
       ,
       {

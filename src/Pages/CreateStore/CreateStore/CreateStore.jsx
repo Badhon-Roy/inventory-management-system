@@ -12,8 +12,17 @@ const CreateStore = () => {
     const { user } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
-        console.log( user._id);
-        axios.post('http://localhost:5000/shops', data)
+        console.log(user._id);
+        const createShopInfo = {
+            shop_name : data.shop_name ,
+            shop_logo : data.shop_logo,
+            shop_owner_name : data.shop_owner_name,
+            shop_owner_email : data.shop_owner_email,
+            shop_info : data.shop_info,
+            shop_location : data.shop_location,
+            product_limit: 3
+        }
+        axios.post('http://localhost:5000/shops', createShopInfo)
             .then(res => {
                 console.log(res.data);
                 if (res.data.insertedId) {
@@ -32,19 +41,19 @@ const CreateStore = () => {
             })
 
         axiosSecure.patch(`/users/manager/${user?.email}`)
-        .then(res =>{
-            console.log(res.data)
-            if(res.data.modifiedCount > 0){
-                Swal.fire({
-                    position: "top-end",
-                    icon: "success",
-                    title: `${user.displayName} is an Manager Now!`,
-                    showConfirmButton: false,
-                    timer: 1500
-                  });
-            }
-        })
-        
+            .then(res => {
+                console.log(res.data)
+                if (res.data.modifiedCount > 0) {
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${user.displayName} is an Manager Now!`,
+                        showConfirmButton: false,
+                        timer: 1500
+                    });
+                }
+            })
+
     };
     return (
         <div className="p-8 md:mx-0 mx-2 my-16 shadow-lg border">
