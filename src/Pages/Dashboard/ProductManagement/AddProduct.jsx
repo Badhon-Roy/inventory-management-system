@@ -19,11 +19,11 @@ const AddProduct = () => {
     const {data} = useQuery({
         queryKey : ['shop_name' , user?.email],
         queryFn : async ()=>{
-
-            const res = await axiosSecure(`/shops?shop_owner_email=${user.email}`)
+            const res = await axiosSecure.get(`/shops?shop_owner_email=${user.email}`)
             return res.data;
         }
     })
+    console.log(data);
     const shop_id = data?._id
     const shop_name = data?.shop_name
     const navigate = useNavigate()

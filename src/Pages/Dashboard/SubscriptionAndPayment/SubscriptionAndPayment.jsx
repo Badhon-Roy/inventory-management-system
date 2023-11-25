@@ -4,10 +4,7 @@ import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
 const SubscriptionAndPayment = () => {
     const axiosSecure = useAxiosSecure()
-    const handleLimit = (limit, pay) => {
-        console.log(limit, 'pay', pay);
-    }
-    const { data, isLoading } = useQuery({
+    const { data = [], isLoading } = useQuery({
         queryKey: ['offers'],
         queryFn: async () => {
             const res = await axiosSecure.get('/offers')
@@ -19,6 +16,9 @@ const SubscriptionAndPayment = () => {
             <span className="loading loading-spinner loading-lg"></span>
         </div>
     }
+    if (!Array.isArray(data)) {
+        return <div>Error: Data is not in the expected format</div>;
+    }
     console.log(data);
     return (
         <div>
@@ -29,7 +29,7 @@ const SubscriptionAndPayment = () => {
                         <h2>Increase the product limit to {offer?.limit} .</h2>
                         <h2>Pay ${offer?.pay}</h2>
                         <Link to={`/dashboard/payment/${offer?._id}`}>
-                            <button onClick={() => handleLimit(offer?.limit, offer?.pay)} className="btn btn-sm btn-primary">Pay</button>
+                            <button className="btn btn-sm btn-primary">Pay</button>
                         </Link>
 
                     </div>
