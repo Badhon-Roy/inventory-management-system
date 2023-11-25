@@ -17,11 +17,20 @@ const ProductManagement = () => {
             return res.data
         }
     })
-    if (isLoading) {
+    const {data : shopData , isLoading : shopDataLoading} = useQuery({
+        queryKey : ['product_limit' , user?.email],
+        queryFn : async ()=>{
+            const res = await axiosSecure.get(`/shops?shop_owner_email=${user.email}`)
+            return res.data;
+        }
+    })
+   
+    if (isLoading || shopDataLoading) {
         return <div className="flex justify-center items-center h-[20vh]">
             <span className="loading loading-spinner loading-lg"></span>
         </div>
     }
+    const limit = shopData?.product_limit ;
 
     const handleDelete = id => {
         Swal.fire({
@@ -55,13 +64,16 @@ const ProductManagement = () => {
             {
                 data.length > 0 ? <div className="flex border justify-between items-center">
                     <h2 className="text-xl font-bold ml-6">Total {data?.length} product added</h2>
-                    <Link to="/dashboard/addProduct">
+                    {
+                        data?.length >= limit ? <Link to="/dashboard/subscriptionAndPayment">
+                        <button className="btn rounded-none btn-primary">Add Product</button>
+                    </Link> : <Link to="/dashboard/addProduct">
                         <button className="btn rounded-none btn-primary">Add Product</button>
                     </Link>
+                    }
                 </div> : <div>
                     <h2 className="text-center mb-2 text-xl font-bold">You do not have any product.</h2>
                     <div className="flex justify-center">
-
                         <Link to="/dashboard/addProduct">
                             <button className="btn rounded-none btn-primary">Add Product</button>
                         </Link>

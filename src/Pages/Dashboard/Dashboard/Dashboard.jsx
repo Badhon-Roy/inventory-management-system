@@ -1,4 +1,4 @@
-import { NavLink, Outlet, useLocation } from "react-router-dom";
+import { NavLink, Outlet } from "react-router-dom";
 import Footer from "../../../Components/Footer/Footer";
 import { GiHamburgerMenu } from "react-icons/gi";
 import useAdmin from "../../../Hook/useAdmin";
@@ -12,8 +12,6 @@ import { TbListDetails } from "react-icons/tb";
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
     const [isManager] = useManager()
-    const location = useLocation()
-    console.log(location.pathname);
     return (
         <div className="max-w-[1600px] mx-auto lg:px-16 md:px-8">
             <div>
