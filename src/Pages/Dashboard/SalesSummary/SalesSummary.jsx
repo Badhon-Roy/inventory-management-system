@@ -23,10 +23,10 @@ const SalesSummary = () => {
     })
 
 
-    const totalInvest = (data?.reduce((previousCost, item) => previousCost + item?.cost, 0));
-    // const totalInvest = (invest).toFixed(2)
+    const invest = (data?.reduce((previousCost, item) => previousCost + item?.cost, 0));
+    const totalInvest = (invest)?.toFixed(2)
     const totalSellingPrice = data?.reduce((previousSellPrice, current) => previousSellPrice + current?.selling_price, 0)
-    const totalSale = data?.reduce((previousSale, current) => previousSale + current?.sale_count, 0)
+    // const totalSale = data?.reduce((previousSale, current) => previousSale + current?.sale_count, 0)
 
     const totalProfit = (totalSellingPrice - totalInvest).toFixed(2);
     return (
@@ -37,7 +37,7 @@ const SalesSummary = () => {
             <div className="grid grid-cols-3 gap-10">
                 <div className="border p-8 rounded-md">
                     <h2 className="text-xl font-bold">Total sale  <br />
-                        {totalSale}</h2>
+                        {sales?.length}</h2>
                 </div>
                 <div className="border p-8 rounded-md">
                     <h2 className="text-xl font-bold">Total Invest <br /> {totalInvest}</h2>
