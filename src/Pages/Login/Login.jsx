@@ -6,6 +6,7 @@ import swal from "sweetalert";
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import useAxiosPublic from '../../Hook/useAxiosPublic';
 import useManager from '../../Hook/useManager';
+import useAdmin from '../../Hook/useAdmin';
 
 const Login = () => {
     const axiosPublic = useAxiosPublic();
@@ -13,6 +14,7 @@ const Login = () => {
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
     const [isManager] = useManager()
+    const [isAdmin] = useAdmin();
 
     const { googleSignIn, signIn } = useContext(AuthContext)
     const handleLogin = e => {
@@ -40,9 +42,10 @@ const Login = () => {
                 const userInfo = { name: res.user?.displayName, email: res.user?.email }
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
-                        console.log(res.data , "google login successful");
+                        console.log(res.data);
                         // navigate(location?.state ? location.state : '/')
                         // navigate(from, { replace: true });
+                        
                         swal("Log in", "successful", "success")
                     })
             })

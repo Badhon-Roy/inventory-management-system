@@ -60,7 +60,7 @@ const ManageShop = () => {
                                         </div>
                                     </td>
                                     <td>{shop?.product_limit}</td>
-                                    <td>{shop?.shop_info}fdsffffffffffffffffffffff</td>
+                                    <td>{shop?.shop_info}</td>
                                     <th>
                                         <button
                                             className="BTN"

@@ -6,6 +6,7 @@ import axios from "axios";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
+import { Helmet } from "react-helmet-async";
 
 
 const CreateStore = () => {
@@ -16,12 +17,12 @@ const CreateStore = () => {
     const onSubmit = data => {
         console.log(user._id);
         const createShopInfo = {
-            shop_name : data.shop_name ,
-            shop_logo : data.shop_logo,
-            shop_owner_name : data.shop_owner_name,
-            shop_owner_email : data.shop_owner_email,
-            shop_info : data.shop_info,
-            shop_location : data.shop_location,
+            shop_name: data.shop_name,
+            shop_logo: data.shop_logo,
+            shop_owner_name: data.shop_owner_name,
+            shop_owner_email: data.shop_owner_email,
+            shop_info: data.shop_info,
+            shop_location: data.shop_location,
             product_limit: 3
         }
         axios.post('http://localhost:5000/shops', createShopInfo)
@@ -54,6 +55,9 @@ const CreateStore = () => {
     };
     return (
         <div className="p-8 md:mx-0 mx-2 my-16 shadow-lg border">
+            <Helmet>
+                <title> Create Store </title>
+            </Helmet>
             <h2 className="md:text-4xl text-2xl my-8 font-bold text-center underline">Create Store</h2>
 
 

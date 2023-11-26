@@ -5,6 +5,7 @@ import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import useManager from "../../Hook/useManager";
 import useAdmin from "../../Hook/useAdmin";
+import { RiLogoutCircleLine } from "react-icons/ri";
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
 
@@ -67,17 +68,17 @@ const Navbar = () => {
                                 }
                             >
                                 Dashboard
-                            </NavLink></li> : 
-                            <li><NavLink
-                            to="/createStore"
-                            className={({ isActive, isPending }) =>
-                                isPending ? "pending" : isActive ? "active" : ""
-                            }
-                        >
-                            Create Store
-                        </NavLink></li>
+                            </NavLink></li> :
+                                <li><NavLink
+                                    to="/createStore"
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "active" : ""
+                                    }
+                                >
+                                    Create Store
+                                </NavLink></li>
                         }
-                        
+
                         <li><NavLink
                             to="/watchDemo"
                             className={({ isActive, isPending }) =>
@@ -94,21 +95,33 @@ const Navbar = () => {
                             <div className="dropdown dropdown-end rounded-none">
                                 <label tabIndex={0} className="btn m-1">
                                     <div className="avatar online">
-                                        <div className="w-8 rounded-full">
+                                        <div className="w-10 rounded-full">
                                             <img src={user?.photoURL} />
                                         </div>
                                     </div>
                                     <h2 className="md:block hidden">{user?.displayName}</h2>
                                 </label>
-                                <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-52">
+                                <ul tabIndex={0} className="dropdown-content z-[10] menu p-2 shadow bg-base-100 rounded-box w-52 mr-2">
                                     <li className="text-xl font-medium">{user?.displayName}</li>
+                                    {
+                                        isAdmin && <li className="text-xl font-bold text-color">Admin</li>
+                                    }
+                                    {
+                                        isManager && <li className="text-xl font-bold text-color">Manager</li>
+                                    }
                                     <li>{user?.email}</li>
-                                    <div className="divider my-1"></div>
-                                    <button onClick={handleLogOut} className="btn text-xl">Log Out</button>
+
+                                    <div className="divider divider-warning my-1"></div>
+                                    <div className="BTN">
+                                        <button onClick={handleLogOut} className="flex items-center">
+                                            <RiLogoutCircleLine className="mr-2 text-2xl" />
+                                            Log Out
+                                        </button>
+                                    </div>
 
                                 </ul>
                             </div>
-                        </div> : <a className="btn text-xl font-bold">
+                        </div> : <a className="BTN mr-4">
                             <NavLink
                                 to="/login"
                                 className={({ isActive, isPending }) =>

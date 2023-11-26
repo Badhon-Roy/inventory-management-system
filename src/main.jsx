@@ -26,6 +26,9 @@ import SalesSummary from './Pages/Dashboard/SalesSummary/SalesSummary';
 import AddProduct from './Pages/Dashboard/ProductManagement/AddProduct';
 import UpdateProduct from './Pages/Dashboard/ProductManagement/UpdateProduct';
 import Payment from './Pages/Dashboard/Payment/Payment';
+
+import { HelmetProvider } from 'react-helmet-async';
+
 const router = createBrowserRouter([
   {
     path: "/",
@@ -76,38 +79,38 @@ const router = createBrowserRouter([
 
       // manager related 
       {
-        path : "productManagement",
-        element : <ProductManagement></ProductManagement>
+        path: "productManagement",
+        element: <ProductManagement></ProductManagement>
       },
       {
-        path :"addProduct",
-        element : <AddProduct></AddProduct>
+        path: "addProduct",
+        element: <AddProduct></AddProduct>
       },
       {
-        path : "updateProduct/:id",
-        element : <UpdateProduct></UpdateProduct>
+        path: "updateProduct/:id",
+        element: <UpdateProduct></UpdateProduct>
       }
       ,
       {
-        path : "payment/:id",
-        element : <Payment></Payment>
+        path: "payment/:id",
+        element: <Payment></Payment>
       }
       ,
       {
-        path : "salesCollection",
-        element : <SalesCollection></SalesCollection>
+        path: "salesCollection",
+        element: <SalesCollection></SalesCollection>
       },
       {
-        path : "checkOut",
-        element : <CheckOut></CheckOut>
+        path: "checkOut",
+        element: <CheckOut></CheckOut>
       },
       {
-        path : "subscriptionAndPayment",
-        element : <SubscriptionAndPayment></SubscriptionAndPayment>
+        path: "subscriptionAndPayment",
+        element: <SubscriptionAndPayment></SubscriptionAndPayment>
       },
       {
-        path : "salesSummary",
-        element : <SalesSummary></SalesSummary>
+        path: "salesSummary",
+        element: <SalesSummary></SalesSummary>
       }
     ]
   }
@@ -118,10 +121,12 @@ const queryClient = new QueryClient()
 
 ReactDOM.createRoot(document.getElementById('root')).render(
   <React.StrictMode>
-    <QueryClientProvider client={queryClient}>
-      <AuthProvider>
-        <RouterProvider router={router} />
-      </AuthProvider>
-    </QueryClientProvider>
+    <HelmetProvider>
+      <QueryClientProvider client={queryClient}>
+        <AuthProvider>
+          <RouterProvider router={router} />
+        </AuthProvider>
+      </QueryClientProvider>
+    </HelmetProvider>
   </React.StrictMode>,
 )
