@@ -5,10 +5,12 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import axios from "axios";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
+import { useNavigate } from "react-router-dom";
 
 
 const CreateStore = () => {
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
     const { user } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
     const onSubmit = data => {
@@ -44,13 +46,8 @@ const CreateStore = () => {
             .then(res => {
                 console.log(res.data)
                 if (res.data.modifiedCount > 0) {
-                    Swal.fire({
-                        position: "top-end",
-                        icon: "success",
-                        title: `${user.displayName} is an Manager Now!`,
-                        showConfirmButton: false,
-                        timer: 1500
-                    });
+                    window.location.reload()
+                    navigate('/dashboard' || "/")
                 }
             })
 

@@ -16,7 +16,7 @@ import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import AllUsers from './Pages/Dashboard/AllUsers/AllUsers';
 import ManageShop from './Pages/Dashboard/ManageShop/ManageShop';
-import SaleSummary from './Pages/Dashboard/SaleSummary/SaleSummary';
+import SaleSummary from './Pages/Dashboard/AdminSaleSummary/AdminSaleSummary';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ProductManagement from './Pages/Dashboard/ProductManagement/ProductManagement';
 import SalesCollection from './Pages/Dashboard/SalesCollection/SalesCollection';

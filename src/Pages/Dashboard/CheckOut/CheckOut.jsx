@@ -1,14 +1,17 @@
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { jsPDF } from "jspdf";
+import { useContext } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
 
 
 const CheckOut = () => {
     const axiosSecure = useAxiosSecure()
+    const {user} = useContext(AuthContext)
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
-            const res = await axiosSecure.get('/checkOut')
+            const res = await axiosSecure.get(`/checkOut?email=${user?.email}`)
             return res.data
         }
     })
@@ -21,6 +24,7 @@ const CheckOut = () => {
     const formateDate = currentDate.toLocaleString()
     const handleSales = (id) => {
         const selectedProduct = data?.find((product) => product._id === id);
+        console.log(selectedProduct);
         const doc = new jsPDF();
         doc.setFontSize(12);
         const topMargin = 10;
@@ -55,13 +59,13 @@ const CheckOut = () => {
 
 
 
-
-
-
-
         const salesInfo = {
+            email : user?.email,
             product_name: selectedProduct?.product_name,
-            sales_date: formateDate
+            sales_date: formateDate,
+            selling_price : selectedProduct?.selling_price,
+            cost : selectedProduct?.cost
+
         }
         axiosSecure.post('/sales', salesInfo)
             .then(res => {

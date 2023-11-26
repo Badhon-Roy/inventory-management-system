@@ -48,7 +48,9 @@ const SalesCollection = () => {
 
     return (
         <div>
-            <h2>THis is sales collection {data?.length} </h2>
+          {
+            data?.length > 0 ? <div>
+                  <h2>THis is sales collection {data?.length} </h2>
             <div>
                 {
                     data?.length > 0 && <div className="mt-8">
@@ -110,6 +112,8 @@ const SalesCollection = () => {
                     </div>
                 }
             </div>
+            </div> : <p className="text-4xl font-bold text-center my-16">You are not any product added</p>
+          }
         </div>
     );
 };

@@ -3,8 +3,14 @@ import logoImg from "../../assets/images/logo1-removebg-preview.png"
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
+import useManager from "../../Hook/useManager";
+import useAdmin from "../../Hook/useAdmin";
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
+
+    const [isManager] = useManager()
+    const [isAdmin] = useAdmin()
+
     const handleLogOut = () => {
         logOut()
             .then(() => {
@@ -53,7 +59,16 @@ const Navbar = () => {
                         >
                             Home
                         </NavLink></li>
-                        <li><NavLink
+                        {
+                            isManager || isAdmin ? <li><NavLink
+                                to="/dashboard"
+                                className={({ isActive, isPending }) =>
+                                    isPending ? "pending" : isActive ? "active" : ""
+                                }
+                            >
+                                Dashboard
+                            </NavLink></li> : 
+                            <li><NavLink
                             to="/createStore"
                             className={({ isActive, isPending }) =>
                                 isPending ? "pending" : isActive ? "active" : ""
@@ -61,6 +76,8 @@ const Navbar = () => {
                         >
                             Create Store
                         </NavLink></li>
+                        }
+                        
                         <li><NavLink
                             to="/watchDemo"
                             className={({ isActive, isPending }) =>
@@ -69,16 +86,6 @@ const Navbar = () => {
                         >
                             Watch Demo
                         </NavLink></li>
-                        {
-                            user?.email && <li><NavLink
-                                to="/dashboard"
-                                className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "active" : ""
-                                }
-                            >
-                                Dashboard
-                            </NavLink></li>
-                        }
                     </ul>
                 </div>
                 <div className="navbar-end">

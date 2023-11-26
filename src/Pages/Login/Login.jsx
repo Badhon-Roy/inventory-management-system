@@ -1,19 +1,18 @@
 
 import { useContext, useState } from 'react';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
-import { Link, useLocation, useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import swal from "sweetalert";
 import { AuthContext } from '../../AuthProvider/AuthProvider';
 import useAxiosPublic from '../../Hook/useAxiosPublic';
+import useManager from '../../Hook/useManager';
 
 const Login = () => {
     const axiosPublic = useAxiosPublic();
     const [errorMassage, setErrorMassage] = useState(null)
     const [showPassword, setShowPassword] = useState(false)
-    const location = useLocation()
     const navigate = useNavigate()
-
-    const from = location.state?.from?.pathname || "/";
+    const [isManager] = useManager()
 
     const { googleSignIn, signIn } = useContext(AuthContext)
     const handleLogin = e => {
@@ -23,8 +22,9 @@ const Login = () => {
         signIn(email, password)
             .then(res => {
                 console.log(res.user);
-                // navigate(location?.state ? location.state : '/')
-                navigate(from, { replace: true });
+                {
+                    isManager && navigate('/dashboard')
+                }
                 swal("Log in", "successful", "success")
                 e.target.reset();
             })
@@ -42,7 +42,7 @@ const Login = () => {
                     .then(res => {
                         console.log(res.data , "google login successful");
                         // navigate(location?.state ? location.state : '/')
-                        navigate(from, { replace: true });
+                        // navigate(from, { replace: true });
                         swal("Log in", "successful", "success")
                     })
             })
@@ -88,13 +88,13 @@ const Login = () => {
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-primary text-xl text-white">Login</button>
+                                <button className="BTN">Login</button>
                             </div>
                         </form>
                         {
                             errorMassage && <p className="text-red-500">{errorMassage}</p>
                         }
-                        <button onClick={handleGoogleLogin} className="border-2 font-bold border-black w-[170px] flex items-center gap-3 p-1 rounded-lg transform translate-x-0 transition-transform ease-in-out duration-300 hover:translate-x-5 bg-gradient-to-r hover:from-green-500 hover:to-blue-500">
+                        <button onClick={handleGoogleLogin} className="border-2 font-bold border-black w-[170px] flex items-center gap-3 p-1 rounded-lg ">
                             <img className="w-8" src="https://tinyurl.com/4d5vrs96" alt="" />
                             sign in google
                         </button>

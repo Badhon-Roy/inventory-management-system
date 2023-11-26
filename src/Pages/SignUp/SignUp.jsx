@@ -11,7 +11,6 @@ const SignUp = () => {
     const { createUser, userProfile } = useContext(AuthContext)
     const [errorMassage, setErrorMassage] = useState('')
     const [showPassword, setShowPassword] = useState(false)
-    const from = location.state?.from?.pathname || "/";
     const navigate = useNavigate()
     const handleRegister = e => {
         e.preventDefault()
@@ -56,8 +55,7 @@ const SignUp = () => {
                                         timer: 1500
                                     });
                                     window.location.reload()
-                                    // navigate(location?.state ? location.state : '/')
-                                    navigate(from, { replace: true });
+                                    navigate('/');
                                 }
                             })
                     })
@@ -67,9 +65,6 @@ const SignUp = () => {
             })
 
     }
-
-
-
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
     }
@@ -122,7 +117,7 @@ const SignUp = () => {
                                 </label>
                             </div>
                             <div className="form-control mt-6">
-                                <button className="btn btn-secondary text-xl text-white">Register</button>
+                                <button className="BTN">Sign Up</button>
                             </div>
                         </form>
                         {
