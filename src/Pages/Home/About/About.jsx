@@ -24,21 +24,21 @@ const About = () => {
                     </div>
                 </div>
             </div>
-            <div className="md:my-32 my-16 grid md:grid-cols-4 grid-cols-1 gap-10">
+            <div className="md:my-32 my-16 grid md:grid-cols-4 grid-cols-2 gap-10">
                 <div className="text-center">
-                    <h2 className="text-color text-6xl font-bold">10M</h2>
+                    <h2 className="text-color md:text-6xl text-3xl font-bold">10M</h2>
                     <p className="text-xl font-bold">Happy Clients</p>
                 </div>
                 <div className="text-center">
-                    <h2 className="text-color text-6xl font-bold">20M</h2>
+                    <h2 className="text-color md:text-6xl text-3xl font-bold">20M</h2>
                     <p className="text-xl font-bold">Global Customers</p>
                 </div>
                 <div className="text-center">
-                    <h2 className="text-color text-6xl font-bold">99+</h2>
+                    <h2 className="text-color md:text-6xl text-3xl font-bold">99+</h2>
                     <p className="text-xl font-bold">Experts Employee</p>
                 </div>
                 <div className="text-center">
-                    <h2 className="text-color text-6xl font-bold">25+</h2>
+                    <h2 className="text-color md:text-6xl text-3xl font-bold">25+</h2>
                     <p className="text-xl font-bold">Awards Win</p>
                 </div>
 

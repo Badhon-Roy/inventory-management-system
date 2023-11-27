@@ -113,7 +113,10 @@ const CheckoutForm = ({ id }) => {
     }
     return (
         <div>
-            <h2 className="text-4xl text-center">Please pay ${data?.pay}</h2>
+            <h2 className="md:text-4xl text-2xl font-bold relative text-center mb-16"> Please 
+                <span className="text-color"> Pay  ${data?.pay} </span>
+                <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-36 w-24"></span>
+            </h2>
             <div className="px-16 my-16 bg-white p-8">
 
                 <form onSubmit={handleSubmit}>

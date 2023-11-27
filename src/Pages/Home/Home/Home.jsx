@@ -1,16 +1,14 @@
 import { AiOutlineMail } from "react-icons/ai";
 import About from "../About/About";
 import Contact from "../Contact/Contact";
-import { LuClock, LuPhoneCall } from "react-icons/lu";
-import { IoLocationOutline } from "react-icons/io5";
 
 
 const Home = () => {
     return (
-        <div className="md:mx-0 mx-4">
-            <img className="md:h-[80vh] w-full object-cover" src="https://thetechportal.com/wp-content/uploads/2021/10/ecommerce-10.jpg" alt="" />
+        <div >
+            <img className="md:h-[80vh] w-full object-cover " src="https://thetechportal.com/wp-content/uploads/2021/10/ecommerce-10.jpg" alt="" />
             <About />
-            <section>
+            <section className="md:mx-0 mx-4">
                 <h2 className="md:text-4xl text-2xl font-bold relative text-center my-16">
                     Why <span className="text-color">Choose </span> Us
                     <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-48 w-28"></span>

@@ -2,10 +2,12 @@ import { useContext } from "react";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import { useNavigate } from "react-router-dom";
 
 const SalesCollection = () => {
     const axiosSecure = useAxiosSecure()
     const { user } = useContext(AuthContext)
+    const navigate = useNavigate();
     const { data, isLoading } = useQuery({
         queryKey: ['products'],
         queryFn: async () => {
@@ -40,6 +42,8 @@ const SalesCollection = () => {
         axiosSecure.post('/checkOut', checkOutInfo)
             .then(res => {
                 console.log(res.data);
+                navigate('/dashboard/checkOut')
+
             })
     }
 
