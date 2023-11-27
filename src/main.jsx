@@ -14,9 +14,7 @@ import AuthProvider from './AuthProvider/AuthProvider';
 import SignUp from './Pages/SignUp/SignUp';
 import Dashboard from './Pages/Dashboard/Dashboard/Dashboard';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
-import AllUsers from './Pages/Dashboard/AllUsers/AllUsers';
 import ManageShop from './Pages/Dashboard/ManageShop/ManageShop';
-import SaleSummary from './Pages/Dashboard/AdminSaleSummary/AdminSaleSummary';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import ProductManagement from './Pages/Dashboard/ProductManagement/ProductManagement';
 import SalesCollection from './Pages/Dashboard/SalesCollection/SalesCollection';
@@ -28,6 +26,8 @@ import UpdateProduct from './Pages/Dashboard/ProductManagement/UpdateProduct';
 import Payment from './Pages/Dashboard/Payment/Payment';
 
 import { HelmetProvider } from 'react-helmet-async';
+import AdminSaleSummary from './Pages/Dashboard/AdminSaleSummary/AdminSaleSummary';
+import AdminRoute from './AdminRoute/AdminRoute';
 
 const router = createBrowserRouter([
   {
@@ -60,21 +60,16 @@ const router = createBrowserRouter([
     path: "/dashboard",
     element: <PrivateRoute><Dashboard></Dashboard></PrivateRoute>,
     children: [
-      {
-        path: "allUsers",
-        element: <AllUsers></AllUsers>
-      },
-
 
 
       // admin related
       {
         path: "manageShop",
-        element: <ManageShop></ManageShop>
+        element: <AdminRoute><ManageShop></ManageShop></AdminRoute>
       },
       {
-        path: "saleSummery",
-        element: <SaleSummary></SaleSummary>
+        path: "AdminSaleSummery",
+        element: <AdminRoute><AdminSaleSummary></AdminSaleSummary></AdminRoute>
       },
 
       // manager related 

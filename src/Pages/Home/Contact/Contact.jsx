@@ -1,7 +1,5 @@
-import { IoLocationOutline } from "react-icons/io5";
-import { LuPhoneCall } from "react-icons/lu";
-import { AiOutlineMail } from "react-icons/ai";
-import { LuClock } from "react-icons/lu";
+
+import { VscSend } from "react-icons/vsc";
 
 
 const Contact = () => {
@@ -14,22 +12,30 @@ const Contact = () => {
 
             <div className="my-16 grid md:grid-cols-4 gap-5">
                 <div className="border p-8 text-center shadow-lg rounded-lg">
-                    <span className="flex justify-center text-5xl text-color"><IoLocationOutline /></span>
+                    <span className="flex justify-center">
+                        <img className="w-[120px] mb-4" src="https://cdn-icons-png.flaticon.com/512/4942/4942069.png" alt="" />
+                    </span>
                     <h2 className="text-xl font-bold my-2">Address</h2>
                     <p>6890 Blvd, The Bronx, NY 1058, USA</p>
                 </div>
                 <div className="border p-8 text-center shadow-lg rounded-lg">
-                    <span className="flex justify-center text-5xl text-color"><LuPhoneCall /></span>
+                    <span className="flex justify-center">
+                        <img className="w-[120px] mb-4" src="https://static.vecteezy.com/system/resources/thumbnails/025/225/156/small/3d-illustration-icon-of-phone-call-with-circular-or-round-podium-png.png" alt="" />
+                    </span>
                     <h2 className="text-xl font-bold my-2">Phone</h2>
                     <p>Hotline: 16798 <br />Tech support: (+123) 456-7898</p>
                 </div>
-                <div className="border p-8 text-center shadow-lg rounded-lg">
-                    <span className="flex justify-center text-5xl text-color"><AiOutlineMail /></span>
+                <div className="border p-8 text-center shadow hover:shadow-2xl rounded-lg">
+                    <span className="flex justify-center">
+                        <img className="w-[100px] mb-4" src="https://assets.stickpng.com/images/584856bce0bb315b0f7675ad.png" alt="" />
+                    </span>
                     <h2 className="text-xl font-bold my-2">Email</h2>
                     <p>hello@dream.com <br /> Skype: hello.dream</p>
                 </div>
                 <div className="border p-8 text-center shadow-lg rounded-lg">
-                    <span className="flex justify-center text-5xl text-color"><LuClock /></span>
+                    <span className="flex justify-center">
+                        <img className="w-[100px] mb-4" src="https://cdn-icons-png.flaticon.com/512/5929/5929568.png" alt="" />
+                    </span>
                     <h2 className="text-xl font-bold my-2">Working Hours</h2>
                     <p>Sunday - Friday <br />8:00AM - 9:00PM</p>
                 </div>
@@ -63,7 +69,12 @@ const Contact = () => {
                         <label htmlFor="" className="text-xl">Massage :</label>
                         <textarea rows={6} type="text" className="w-full border-2 px-3 py-1 focus:outline-[#ff792e]" placeholder="Massage" name="" id="" />
                     </div>
-                    <button className="BTN">Send Massage</button>
+                    <div className="BTN">
+                        <button className="flex items-center">
+                            Send Massage
+                            <VscSend className="ml-2 text-2xl" />
+                        </button>
+                    </div>
                 </div>
                 <div className="md:w-1/3 flex justify-center">
                     <img className="md:w-auto w-[250px]" src="https://medq-react.envytheme.com/img/contact.png" alt="" />

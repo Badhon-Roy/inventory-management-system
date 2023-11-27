@@ -7,7 +7,7 @@ import { IoLocationOutline } from "react-icons/io5";
 
 const Home = () => {
     return (
-        <div>
+        <div className="md:mx-0 mx-4">
             <img className="md:h-[80vh] w-full object-cover" src="https://thetechportal.com/wp-content/uploads/2021/10/ecommerce-10.jpg" alt="" />
             <About />
             <section>
@@ -18,24 +18,32 @@ const Home = () => {
 
                 <div className="my-16 grid md:grid-cols-4 gap-5">
                     <div className="border p-8 text-center shadow-lg rounded-lg">
-                        <span className="flex justify-center text-5xl text-color"><IoLocationOutline /></span>
-                        <h2 className="text-xl font-bold my-2">Address</h2>
-                        <p>6890 Blvd, The Bronx, NY 1058, USA</p>
+                        <span className="flex justify-center">
+                            <img className="w-[100px] mb-5" src="https://cdn-icons-png.flaticon.com/512/4160/4160989.png" alt="" />
+                        </span>
+                        <h2 className="text-xl font-bold my-2">User-Friendly Interface</h2>
+                        <p>Discuss how your inventory management system offers an intuitive and user-friendly interface.</p>
                     </div>
                     <div className="border p-8 text-center shadow-lg rounded-lg">
-                        <span className="flex justify-center text-5xl text-color"><LuPhoneCall /></span>
-                        <h2 className="text-xl font-bold my-2">Phone</h2>
-                        <p>Hotline: 16798 <br />Tech support: (+123) 456-7898</p>
+                        <span className="flex justify-center">
+                            <img className="w-[100px] mb-5" src="https://cdn-icons-png.flaticon.com/512/3542/3542975.png" alt="" />
+                        </span>
+                        <h2 className="text-xl font-bold my-2">Customization Options</h2>
+                        <p>Tailor our inventory management system to your needs with flexible customization options, ensuring a seamless fit for your unique business requirements.</p>
                     </div>
                     <div className="border p-8 text-center shadow-lg rounded-lg">
-                        <span className="flex justify-center text-5xl text-color"><AiOutlineMail /></span>
-                        <h2 className="text-xl font-bold my-2">Email</h2>
-                        <p>hello@dream.com <br /> Skype: hello.dream</p>
+                        <span className="flex justify-center">
+                            <img className="w-[100px] mb-5" src="https://cdn-icons-png.flaticon.com/512/5145/5145897.png" alt="" />
+                        </span>
+                        <h2 className="text-xl font-bold my-2">Security Measures</h2>
+                        <p>Ensure data safety with robust security: encryption, secure logins, and regular audits for comprehensive protection.</p>
                     </div>
                     <div className="border p-8 text-center shadow-lg rounded-lg">
-                        <span className="flex justify-center text-5xl text-color"><LuClock /></span>
-                        <h2 className="text-xl font-bold my-2">Working Hours</h2>
-                        <p>Sunday - Friday <br />8:00AM - 9:00PM</p>
+                        <span className="flex justify-center">
+                            <img className="w-[100px] mb-5" src="https://cdn-icons-png.flaticon.com/512/7364/7364295.png" alt="" />
+                        </span>
+                        <h2 className="text-xl font-bold my-2">Automation Features</h2>
+                        <p>Detail the automation features of your system, such as automatic reordering, alerts for low stock levels, and automated reporting</p>
                     </div>
                 </div>
             </section>

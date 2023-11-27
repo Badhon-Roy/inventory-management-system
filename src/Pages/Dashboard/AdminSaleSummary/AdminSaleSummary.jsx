@@ -5,14 +5,14 @@ import { useState } from "react";
 const AdminSaleSummary = () => {
     const axiosSecure = useAxiosSecure();
     const [selectedUser, setSelectedUser] = useState(null);
-    const { data: users } = useQuery({
+    const { data: users = [] } = useQuery({
         queryKey: ["users"],
         queryFn: async () => {
             const res = await axiosSecure.get('/users')
             return res.data
         }
     });
-    const { data: shops } = useQuery({
+    const { data: shops = [] } = useQuery({
         queryKey: ['shops'],
         queryFn: async () => {
             const res = await axiosSecure.get('/shops')
@@ -64,28 +64,28 @@ const AdminSaleSummary = () => {
                                 <td>{shop?.shop_name || "No Shop"}</td>
                                 <td>{user?.role || "User"}</td>
                                 {
-                                    !shop?.shop_name && !user?.role && 
+                                    !shop?.shop_name && !user?.role &&
                                     <th>
-                                    <button
-                                        className="BTN"
-                                        onClick={() => handleSendNotice(user)}
-                                    >
-                                        Send Notice
-                                    </button>
-                                    <dialog id="my_modal_1" className="modal">
-                                        <div className="modal-box">
-                                            <h3 className="font-bold text-lg text-center mb-3">
-                                                {selectedUser?.name}
-                                            </h3>
-                                            <input className="p-4 text-[16px] w-full" type="text" name="notice" id="" />
-                                            <div className="modal-action">
-                                                <form method="dialog">
-                                                    <button className="BTN">Send</button>
-                                                </form>
+                                        <button
+                                            className="BTN"
+                                            onClick={() => handleSendNotice(user)}
+                                        >
+                                            Send Notice
+                                        </button>
+                                        <dialog id="my_modal_1" className="modal">
+                                            <div className="modal-box">
+                                                <h3 className="font-bold text-lg text-center mb-3">
+                                                    {selectedUser?.name}
+                                                </h3>
+                                                <input className="p-4 text-[16px] w-full" type="text" name="notice" id="" />
+                                                <div className="modal-action">
+                                                    <form method="dialog">
+                                                        <button className="BTN">Send</button>
+                                                    </form>
+                                                </div>
                                             </div>
-                                        </div>
-                                    </dialog>
-                                </th>
+                                        </dialog>
+                                    </th>
                                 }
                             </tr>
                         ))}

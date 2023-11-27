@@ -43,9 +43,9 @@ const Login = () => {
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         console.log(res.data);
-                        // navigate(location?.state ? location.state : '/')
-                        // navigate(from, { replace: true });
-                        
+                        {
+                            isAdmin && navigate('/dashboard' || '/')
+                        }
                         swal("Log in", "successful", "success")
                     })
             })

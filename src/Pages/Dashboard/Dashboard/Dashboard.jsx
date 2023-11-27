@@ -41,7 +41,7 @@ const Dashboard = () => {
                                                     Manage Shop
                                                 </NavLink></li>
                                                 <li><NavLink
-                                                    to="/dashboard/saleSummery"
+                                                    to="/dashboard/AdminSaleSummery"
                                                     className={({ isActive, isPending }) =>
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
@@ -58,7 +58,7 @@ const Dashboard = () => {
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
                                                 >
-                                                  <MdProductionQuantityLimits />  Product Management
+                                                    <MdProductionQuantityLimits />  Product Management
                                                 </NavLink></li>
                                                 <li><NavLink
                                                     to="/dashboard/salesCollection"
@@ -66,7 +66,7 @@ const Dashboard = () => {
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
                                                 >
-                                                   <MdOutlineCollections></MdOutlineCollections> Sales Collection
+                                                    <MdOutlineCollections></MdOutlineCollections> Sales Collection
                                                 </NavLink></li>
                                                 <li><NavLink
                                                     to="/dashboard/checkOut"
@@ -82,7 +82,7 @@ const Dashboard = () => {
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
                                                 >
-                                                   <FaMoneyBill /> Subscription & Payment
+                                                    <FaMoneyBill /> Subscription & Payment
                                                 </NavLink></li>
                                                 <li><NavLink
                                                     to="/dashboard/salesSummary"
@@ -90,7 +90,7 @@ const Dashboard = () => {
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
                                                 >
-                                                   <TbListDetails /> Sales Summery
+                                                    <TbListDetails /> Sales Summery
                                                 </NavLink></li>
                                             </>;
                                         default:
@@ -107,7 +107,7 @@ const Dashboard = () => {
                                     isPending ? "pending" : isActive ? "active" : ""
                                 }
                             >
-                               <FaHome></FaHome> Home
+                                <FaHome></FaHome> Home
                             </NavLink></li>
                         </ul>
 

@@ -3,12 +3,14 @@ import PropTypes from 'prop-types'
 import { GoogleAuthProvider, createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from "firebase/auth";
 import auth from "../Firebase/Firebase.config";
 import { createContext, useEffect, useState } from 'react';
+import useAxiosPublic from '../Hook/useAxiosPublic';
 
 
 
 export const AuthContext = createContext(null)
 const googleProvider = new GoogleAuthProvider()
 const AuthProvider = ({children}) => {
+    const axiosPublic = useAxiosPublic()
     const [user , setUser] = useState()
     const [loading , setLoading] = useState(true)
 
@@ -37,13 +39,27 @@ const AuthProvider = ({children}) => {
     }
     useEffect(()=>{
         const unsubscribe = onAuthStateChanged(auth , currentUser =>{
-            setLoading(false)
             setUser(currentUser)
+            if(currentUser){
+                const userInfo = { email : currentUser?.email}
+                console.log('client email',userInfo);
+                axiosPublic.post('/jwt' , userInfo)
+                .then(res =>{
+                    if(res.data?.token){
+                        localStorage.setItem('access-token' , res.data.token);
+                    }
+                })
+                
+            }
+            else{
+               localStorage.removeItem('access-token');
+            }
+            setLoading(false)
         })
         return () =>{
             unsubscribe();
         }
-    },[])
+    },[axiosPublic])
 
 
 
