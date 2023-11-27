@@ -17,20 +17,20 @@ const ProductManagement = () => {
             return res.data
         }
     })
-    const {data : shopData , isLoading : shopDataLoading} = useQuery({
-        queryKey : ['product_limit' , user?.email],
-        queryFn : async ()=>{
+    const { data: shopData, isLoading: shopDataLoading } = useQuery({
+        queryKey: ['product_limit', user?.email],
+        queryFn: async () => {
             const res = await axiosSecure.get(`/shops?shop_owner_email=${user.email}`)
             return res.data;
         }
     })
-   
+
     if (isLoading || shopDataLoading) {
         return <div className="flex justify-center items-center h-[20vh]">
             <span className="loading loading-spinner loading-lg"></span>
         </div>
     }
-    const limit = shopData?.product_limit ;
+    const limit = shopData?.product_limit;
 
     const handleDelete = id => {
         Swal.fire({
@@ -62,14 +62,17 @@ const ProductManagement = () => {
     return (
         <div>
             {
-                data.length > 0 ? <div className="flex border justify-between items-center">
-                    <h2 className="text-xl font-bold ml-6">Total {data?.length} product added</h2>
+                data.length > 0 ? <div className="flex border rounded justify-between items-center">
+                    <div className="flex items-center gap-2 ml-5">
+                        <img className="w-[42px]" src="https://cdn3d.iconscout.com/3d/premium/thumb/product-5806313-4863042.png" alt="" />
+                        <h2 className="text-xl font-bold">Total {data?.length} product added</h2>
+                    </div>
                     {
                         data?.length >= limit ? <Link to="/dashboard/subscriptionAndPayment">
-                        <button className="BTN">Add Product</button>
-                    </Link> : <Link to="/dashboard/addProduct">
-                        <button className="BTN">Add Product</button>
-                    </Link>
+                            <button className="BTN">Add Product</button>
+                        </Link> : <Link to="/dashboard/addProduct">
+                            <button className="BTN">Add Product</button>
+                        </Link>
                     }
                 </div> : <div>
                     <h2 className="text-center mb-2 text-xl font-bold">You do not have any product.</h2>
@@ -83,20 +86,21 @@ const ProductManagement = () => {
             {
                 data?.length > 0 && <div className="mt-8">
                     <div className="overflow-x-auto">
-                        <table className="table">
+                        <table className="table text-center">
                             {/* head */}
-                            <thead>
+                            <thead className="text-xl">
                                 <tr>
-                                    <th>
+                                    <th className="bg-gray-300">
                                         <label>
                                             #
                                         </label>
                                     </th>
-                                    <th>Product</th>
-                                    <th>Quantity</th>
-                                    <th>Sale Count</th>
-                                    <th>Update</th>
-                                    <th>Delete</th>
+                                    <th className="w-1/5 bg-red-300">Image</th>
+                                    <th className="w-2/4 bg-green-300">Product Name</th>
+                                    <th className="bg-purple-300">Quantity</th>
+                                    <th className="bg-blue-300">Sale Count</th>
+                                    <th className="bg-yellow-400">Update</th>
+                                    <th className="bg-red-400">Delete</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -109,18 +113,18 @@ const ProductManagement = () => {
                                                 </label>
                                             </th>
                                             <td>
-                                                <div className="flex items-center gap-3">
+                                                <div className="flex items-center justify-center gap-3">
                                                     <div className="avatar">
-                                                        <div className="mask mask-squircle w-16 h-16">
+                                                        <div className=" border border-black rounded-md w-24 h-16">
                                                             <img src={item.product_image} alt="Avatar Tailwind CSS Component" />
+                                                            
                                                         </div>
                                                     </div>
-                                                    <div>
-                                                        <div className="font-bold">{item.product_name}</div>
-                                                        <div className="text-sm opacity-50">{item?.product_location
-                                                        }</div>
-                                                    </div>
+
                                                 </div>
+                                            </td>
+                                            <td>
+                                                    <div className="text-[15px] text-left">{item.product_name} fsdfsdf sfsdfsd fsdf sdfsdf sdf sdfsd fasdf sadfas fds fsadfsad fsad fsadf sdf sdfsdfa asd</div>
                                             </td>
                                             <td>
                                                 {item?.quantity}

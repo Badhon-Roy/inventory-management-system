@@ -10,6 +10,7 @@ const CheckoutForm = ({ id }) => {
     const stripe = useStripe();
     const [clientSecret, setClientSecret] = useState("");
     const [transactionId, setTransactionId] = useState('')
+    const [shopId, setShopId] = useState('')
     const elements = useElements();
     const [error, setError] = useState('')
     const axiosSecure = useAxiosSecure()
@@ -20,16 +21,25 @@ const CheckoutForm = ({ id }) => {
             return res.data
         }
     })
-    const offerLimit = parseInt(data?.limit) || 1 ;
+    const offerLimit = parseInt(data?.limit) || 1;
 
+   
 
-    const {data : shopData} = useQuery({
-        queryKey : ['product_limit' , user?.email],
-        queryFn : async ()=>{
+    const { data: shopData , isLoading : shopDataLoading } = useQuery({
+        queryKey: ['product_limit', user?.email],
+        queryFn: async () => {
             const res = await axiosSecure.get(`/shops?shop_owner_email=${user.email}`)
             return res.data;
         }
     })
+    useEffect(() => {
+        if (shopData && shopData?.length > 0) {
+            setShopId(shopData[0]._id);
+        } else {
+            console.log('No shop data available.');
+        }
+    }, [shopData]);
+
 
 
     useEffect(() => {
@@ -76,7 +86,7 @@ const CheckoutForm = ({ id }) => {
                 },
             },
         );
-        
+
         if (confirmError) {
             console.log("confirmError", confirmError);
             setError(confirmError.message)
@@ -87,16 +97,16 @@ const CheckoutForm = ({ id }) => {
                 console.log("transaction id", paymentIntent.id);
                 setTransactionId(paymentIntent.id)
                 const incrementInfo = {
-                    product_limit : 100
+                    product_limit: 100
                 }
-                axiosSecure.put(`/shops/${shopData?._id}/increment?limit=${offerLimit}`, incrementInfo)
+                axiosSecure.put(`/shops/${shopId}/increment?limit=${offerLimit}`, incrementInfo)
                     .then(res => {
                         console.log(res.data);
                     })
             }
         }
     };
-    if (isLoading) {
+    if (isLoading || shopDataLoading) {
         return <div className="flex justify-center items-center h-[20vh]">
             <span className="loading loading-spinner loading-lg"></span>
         </div>

@@ -7,17 +7,60 @@ import { FaHome, FaMoneyBill } from "react-icons/fa";
 import { MdOutlineCollections, MdProductionQuantityLimits } from "react-icons/md";
 import { IoBagCheckOutline } from "react-icons/io5";
 import { TbListDetails } from "react-icons/tb";
+import { AiOutlineLogout } from "react-icons/ai";
+import { useContext, useEffect, useState } from "react";
+import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../../../Hook/useAxiosSecure";
+// import { useQuery } from "@tanstack/react-query";
+// import useAxiosSecure from "../../../Hook/useAxiosSecure";
 
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
     const [isManager] = useManager()
+    const {logOut} = useContext(AuthContext)
+    const {user} = useContext(AuthContext)
+    const [shopLogo , setShopLogo] = useState('')
+    const axiosSecure = useAxiosSecure();
+    const { data: shopData  } = useQuery({
+        queryKey: ['product_limit', user?.email],
+        queryFn: async () => {
+            const res = await axiosSecure.get(`/shops?shop_owner_email=${user.email}`)
+            return res.data;
+        }
+    })
+    useEffect(() => {
+        if (shopData && shopData?.length > 0) {
+            setShopLogo(shopData[0].shop_logo);
+        } else {
+            console.log('No shop data available.');
+        }
+    }, [shopData]);
+
+
+    const handleLogOut = () => {
+        logOut()
+            .then(() => {
+                Swal.fire({
+                    position: "top-end",
+                    icon: "success",
+                    title: "Log Out successful",
+                    showConfirmButton: false,
+                    timer: 1500
+                });
+            }).catch((error) => {
+                console.log(error.massage);
+            })
+    }
+
     return (
         <div className="max-w-[1600px] mx-auto lg:px-16 md:px-8">
             <div>
                 <div className="drawer md:drawer-open">
                     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
-                    <div className="drawer-content ml-5 py-16 px-4 bg-red-300">
+                    <div className="drawer-content ml-5 py-16 px-4">
                         {/* Page content here */}
                         <Outlet></Outlet>
                         <label htmlFor="my-drawer-2" className="btn text-2xl absolute left-3 top-1 btn-primary drawer-button lg:hidden"><GiHamburgerMenu></GiHamburgerMenu></label>
@@ -51,14 +94,20 @@ const Dashboard = () => {
                                             </>;
                                         case isManager:
                                             return <>
-                                                <p className="text-4xl">Manager</p>
+                                            {
+                                               shopData && shopData?.length > 0 ?
+                                               <div className="flex justify-center">
+                                                <img className="w-[80px]" src={shopLogo} alt="" />
+                                               </div> : <p>No Logo</p>
+                                            }
+                                                
                                                 <li><NavLink
                                                     to="/dashboard/productManagement"
                                                     className={({ isActive, isPending }) =>
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
                                                 >
-                                                    <MdProductionQuantityLimits />  Product Management
+                                                    <MdProductionQuantityLimits  className="text-xl"/>  Product Management
                                                 </NavLink></li>
                                                 <li><NavLink
                                                     to="/dashboard/salesCollection"
@@ -66,7 +115,7 @@ const Dashboard = () => {
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
                                                 >
-                                                    <MdOutlineCollections></MdOutlineCollections> Sales Collection
+                                                    <MdOutlineCollections className="text-xl"></MdOutlineCollections> Sales Collection
                                                 </NavLink></li>
                                                 <li><NavLink
                                                     to="/dashboard/checkOut"
@@ -74,7 +123,7 @@ const Dashboard = () => {
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
                                                 >
-                                                    <IoBagCheckOutline />Check Out
+                                                    <IoBagCheckOutline className="text-xl" />Check Out
                                                 </NavLink></li>
                                                 <li><NavLink
                                                     to="/dashboard/subscriptionAndPayment"
@@ -82,7 +131,7 @@ const Dashboard = () => {
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
                                                 >
-                                                    <FaMoneyBill /> Subscription & Payment
+                                                    <FaMoneyBill className="text-xl" /> Subscription & Payment
                                                 </NavLink></li>
                                                 <li><NavLink
                                                     to="/dashboard/salesSummary"
@@ -90,7 +139,7 @@ const Dashboard = () => {
                                                         isPending ? "pending" : isActive ? "active" : ""
                                                     }
                                                 >
-                                                    <TbListDetails /> Sales Summery
+                                                    <TbListDetails  className="text-xl"/> Sales Summery
                                                 </NavLink></li>
                                             </>;
                                         default:
@@ -101,6 +150,7 @@ const Dashboard = () => {
                                 })()
                             }
                             <div className="divider"></div>
+
                             <li className="text-xl"><NavLink
                                 to="/"
                                 className={({ isActive, isPending }) =>
@@ -109,6 +159,12 @@ const Dashboard = () => {
                             >
                                 <FaHome></FaHome> Home
                             </NavLink></li>
+                            <div className="BTN">
+                                        <button onClick={handleLogOut} className="flex items-center">
+                                            Log Out
+                                            <AiOutlineLogout className="ml-2 text-2xl" />
+                                        </button>
+                                    </div>
                         </ul>
 
                     </div>

@@ -55,24 +55,31 @@ const Navbar = () => {
                         >
                             Home
                         </NavLink></li>
-                        {
-                            isManager || isAdmin ? <li><NavLink
-                                to="/dashboard"
-                                className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "active" : ""
-                                }
-                            >
-                                Dashboard
-                            </NavLink></li> :
-                                <li><NavLink
+                        
+                        {isManager || isAdmin ? (
+                            <li>
+                                <NavLink
+                                    to={isManager ? "/dashboard/productManagement" : isAdmin ? "/dashboard/manageShop" : ""}
+                                    className={({ isActive, isPending }) =>
+                                        isPending ? "pending" : isActive ? "active" : ""
+                                    }
+                                >
+                                    Dashboard
+                                </NavLink>
+                            </li>
+                        ) : (
+                            <li>
+                                <NavLink
                                     to="/createStore"
                                     className={({ isActive, isPending }) =>
                                         isPending ? "pending" : isActive ? "active" : ""
                                     }
                                 >
                                     Create Store
-                                </NavLink></li>
-                        }
+                                </NavLink>
+                            </li>
+                        )}
+
 
                         <li><NavLink
                             to="/watchDemo"

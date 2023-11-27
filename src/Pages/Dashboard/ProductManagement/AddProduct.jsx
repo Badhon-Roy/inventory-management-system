@@ -82,12 +82,15 @@ const AddProduct = () => {
 
     return (
         <div>
-            <h2 className="md:text-4xl mb-8 text-2xl text-center underline font-bold">Add Product</h2>
+            <h2 className="md:text-4xl text-2xl font-bold relative text-center mb-16">
+                <span className="text-color">Add </span> Product
+                <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-36 w-24"></span>
+            </h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div className="md:flex gap-16 justify-between">
                     <div className="flex-1 space-y-2" >
                         <label className="text-xl font-bold">Product Name:</label>
-                        <input {...register("productName", { required: true })} className="w-full px-5 rounded-md py-1 border" placeholder="Enter product name" />
+                        <input {...register("productName", { required: true })} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter product name" />
                         {errors.productName && <span className="text-red-500">This field is required</span>}
                     </div>
 
@@ -100,13 +103,13 @@ const AddProduct = () => {
                 <div className="md:flex gap-16 justify-between">
                     <div className="flex-1 space-y-2">
                         <label className="text-xl font-bold">Product Quantity:</label>
-                        <input type="number" {...register("productQuantity", { required: true })} className="w-full px-5 rounded-md py-1 border" placeholder="Enter quantity" />
+                        <input type="number" {...register("productQuantity", { required: true })} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter quantity" />
                         {errors.productQuantity && <span className="text-red-500">This field is required</span>}
                     </div>
 
                     <div className="flex-1 space-y-2">
                         <label className="text-xl font-bold">Product Location:</label>
-                        <input {...register("productLocation", { required: true })} className="w-full px-5 rounded-md py-1 border" placeholder="Enter location" />
+                        <input {...register("productLocation", { required: true })} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter location" />
                         {errors.productLocation && <span className="text-red-500">This field is required</span>}
                     </div>
                 </div>
@@ -114,30 +117,30 @@ const AddProduct = () => {
                 <div className="md:flex gap-16 justify-between">
                     <div className="flex-1 space-y-2">
                         <label className="text-xl font-bold">Production Cost:</label>
-                        <input type="number" {...register("productionCost", { required: true })} className="w-full px-5 rounded-md py-1 border" placeholder="Enter production cost" />
+                        <input type="number" {...register("productionCost", { required: true })} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter production cost" />
                         {errors.productionCost && <span className="text-red-500">This field is required</span>}
                     </div>
 
                     <div className="flex-1 space-y-2">
                         <label className="text-xl font-bold">Profit Margin (%):</label>
-                        <input type="number" {...register("profitMargin", { required: true })} className="w-full px-5 rounded-md py-1 border" placeholder="Enter profit margin" />
+                        <input type="number" {...register("profitMargin", { required: true })} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter profit margin" />
                         {errors.profitMargin && <span className="text-red-500">This field is required</span>}
                     </div>
                     <div>
                         <label className="text-xl font-bold">Discount (%):</label>
-                        <input type="number" {...register("discount")} className="w-full px-5 rounded-md py-1 border" placeholder="Enter discount" />
+                        <input type="number" {...register("discount")} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter discount" />
                     </div>
                 </div>
 
 
 
                 <label className="text-xl font-bold">Product Description:</label>
-                <textarea rows={5} {...register("productDescription", { required: true })} className="w-full px-5 rounded-md py-1 border" placeholder="Enter product description" />
+                <textarea rows={5} {...register("productDescription", { required: true })} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter product description" />
                 {errors.productDescription && <span className="text-red-500">This field is required</span>}
 
                 <br />
 
-                <button type="submit" className="btn btn-block text-xl">Add Product</button>
+                <button type="submit" className="BTN w-full">Add Product</button>
             </form>
         </div>
     );

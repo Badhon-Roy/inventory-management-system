@@ -67,12 +67,15 @@ const UpdateProduct = () => {
     };
     return (
         <div> 
-            <h2 className="md:text-4xl text-2xl font-bold text-center underline mb-8">Update Product </h2>
+             <h2 className="md:text-4xl text-2xl font-bold relative text-center mb-16">
+                <span className="text-color">Update </span> Product
+                <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-36 w-24"></span>
+            </h2>
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-5">
                 <div className="md:flex gap-16 justify-between">
                     <div className="flex-1 space-y-2" >
                         <label className="text-xl font-bold">Product Name:</label>
-                        <input defaultValue={data?.product_name} {...register("productName", { required: true })} className="w-full px-5 rounded-md py-1 border"   placeholder="Enter product name" />
+                        <input defaultValue={data?.product_name} {...register("productName", { required: true })} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border"   placeholder="Enter product name" />
                         {errors.productName && <span className="text-red-500">This field is required</span>}
                     </div>
 
@@ -86,14 +89,14 @@ const UpdateProduct = () => {
                 <div className="md:flex gap-16 justify-between">
                     <div className="flex-1 space-y-2">
                         <label className="text-xl font-bold">Product Quantity:</label>
-                        <input type="number" {...register("productQuantity", { required: true })} defaultValue={data?.quantity} className="w-full px-5 rounded-md py-1 border" placeholder="Enter quantity" />
+                        <input type="number" {...register("productQuantity", { required: true })} defaultValue={data?.quantity} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter quantity" />
                         {errors.productQuantity && <span className="text-red-500">This field is required</span>}
                     </div>
 
                     <div className="flex-1 space-y-2">
                         <label className="text-xl font-bold">Product Location:</label>
                         <input {...register("productLocation", { required: true })}
-                        defaultValue={data?.product_location} className="w-full px-5 rounded-md py-1 border" placeholder="Enter location" />
+                        defaultValue={data?.product_location} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter location" />
                         {errors.productLocation && <span className="text-red-500">This field is required</span>}
                     </div>
                 </div>
@@ -101,30 +104,30 @@ const UpdateProduct = () => {
                 <div className="md:flex gap-16 justify-between">
                     <div className="flex-1 space-y-2">
                         <label className="text-xl font-bold">Production Cost:</label>
-                        <input type="number" {...register("productionCost", { required: true })} defaultValue={data?.cost} className="w-full px-5 rounded-md py-1 border" placeholder="Enter production cost" />
+                        <input type="number" {...register("productionCost", { required: true })} defaultValue={data?.cost} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter production cost" />
                         {errors.productionCost && <span className="text-red-500">This field is required</span>}
                     </div>
 
                     <div className="flex-1 space-y-2">
                         <label className="text-xl font-bold">Profit Margin (%):</label>
-                        <input type="number" {...register("profitMargin", { required: true })} defaultValue={data?.profit_margin} className="w-full px-5 rounded-md py-1 border" placeholder="Enter profit margin" />
+                        <input type="number" {...register("profitMargin", { required: true })} defaultValue={data?.profit_margin} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter profit margin" />
                         {errors.profitMargin && <span className="text-red-500">This field is required</span>}
                     </div>
                     <div>
                         <label className="text-xl font-bold">Discount (%):</label>
-                        <input type="number" defaultValue={data?.discount} {...register("discount")} className="w-full px-5 rounded-md py-1 border" placeholder="Enter discount" />
+                        <input type="number" defaultValue={data?.discount} {...register("discount")} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter discount" />
                     </div>
                 </div>
 
 
 
                 <label className="text-xl font-bold">Product Description:</label>
-                <textarea rows={5} {...register("productDescription", { required: true })} defaultValue={data?.description} className="w-full px-5 rounded-md py-1 border" placeholder="Enter product description" />
+                <textarea rows={5} {...register("productDescription", { required: true })} defaultValue={data?.description} className="w-full focus:outline-[#ff792e] px-5 rounded-md py-1 border" placeholder="Enter product description" />
                 {errors.productDescription && <span className="text-red-500">This field is required</span>}
 
                 <br />
 
-                <button type="submit" className="btn btn-block text-xl">Update Product</button>
+                <button type="submit" className="BTN w-full">Update Product</button>
             </form>
         </div>
     );
