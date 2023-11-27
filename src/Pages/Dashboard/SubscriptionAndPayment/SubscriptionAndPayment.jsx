@@ -23,8 +23,8 @@ const SubscriptionAndPayment = () => {
     return (
         <div>
              <h2 className="md:text-4xl text-2xl font-bold relative text-center mb-16"> All
-                <span className="text-color">Subscription {data?.length} </span>
-                <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-36 w-24"></span>
+                <span className="text-color"> Subscription {data?.length} </span>
+                <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-44 w-24"></span>
             </h2>
             {
                 data?.map(offer =>

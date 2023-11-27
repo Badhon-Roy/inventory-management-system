@@ -56,8 +56,8 @@ const Dashboard = () => {
     }
 
     return (
-        <div className="max-w-[1600px] mx-auto lg:px-16 md:px-8">
-            <div>
+        <div>
+            <div className="max-w-[1600px] mx-auto lg:px-16 md:px-8">
                 <div className="drawer md:drawer-open">
                     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content ml-5 py-16 px-4">
@@ -68,7 +68,7 @@ const Dashboard = () => {
                     </div>
                     <div className="drawer-side">
                         <label htmlFor="my-drawer-2" aria-label="close sidebar" className="drawer-overlay"></label>
-                        <ul className="menu py-16 px-4 md:px-8 md:w-80  bg-base-200 text-base-content">
+                        <ul className="menu py-16 px-4 md:px-8 h-full md:w-80  bg-base-200 text-base-content">
                             {
                                 (() => {
                                     switch (true) {

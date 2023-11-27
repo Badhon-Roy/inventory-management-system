@@ -3,6 +3,7 @@ import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
 import { useNavigate } from "react-router-dom";
+import Swal from "sweetalert2";
 
 const SalesCollection = () => {
     const axiosSecure = useAxiosSecure()
@@ -15,11 +16,7 @@ const SalesCollection = () => {
             return res.data
         }
     })
-    if (isLoading) {
-        return <div className="flex justify-center items-center h-[20vh]">
-            <span className="loading loading-spinner loading-lg"></span>
-        </div>
-    }
+    
     const handleAdd = (item) => {
         const checkOutInfo = {
             product_id: item?._id,
@@ -42,12 +39,27 @@ const SalesCollection = () => {
         axiosSecure.post('/checkOut', checkOutInfo)
             .then(res => {
                 console.log(res.data);
-                navigate('/dashboard/checkOut')
+                if(res.data.insertedId){
+                    console.log('check out', true); 
+                    Swal.fire({
+                        position: "top-end",
+                        icon: "success",
+                        title: `${item?.product_name} has been check out`,
+                        showConfirmButton: false,
+                        timer: 1500
+                      });
+                      
+                      navigate('/dashboard/checkOut')
+                }
 
             })
     }
 
-
+    if (isLoading) {
+        return <div className="flex justify-center items-center h-[20vh]">
+            <span className="loading loading-spinner loading-lg"></span>
+        </div>
+    }
 
 
     return (

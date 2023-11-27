@@ -2,15 +2,16 @@ import { useContext } from "react";
 import { useForm } from "react-hook-form";
 import { BsDot } from "react-icons/bs"
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
-import axios from "axios";
 import Swal from "sweetalert2";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
+import useAxiosPublic from "../../../Hook/useAxiosPublic";
 
 
 const CreateStore = () => {
     const axiosSecure = useAxiosSecure()
+    const axiosPublic = useAxiosPublic()
     const navigate = useNavigate()
     const { user } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
@@ -25,7 +26,7 @@ const CreateStore = () => {
             shop_location: data.shop_location,
             product_limit: 3
         }
-        axios.post('http://localhost:5000/shops', createShopInfo)
+        axiosPublic.post('/shops', createShopInfo)
             .then(res => {
                 console.log(res.data);
                 if (res.data.insertedId) {

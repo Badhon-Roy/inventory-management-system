@@ -1,4 +1,4 @@
-import { AiOutlineMail } from "react-icons/ai";
+
 import About from "../About/About";
 import Contact from "../Contact/Contact";
 
