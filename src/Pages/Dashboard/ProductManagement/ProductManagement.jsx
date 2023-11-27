@@ -124,7 +124,7 @@ const ProductManagement = () => {
                                                 </div>
                                             </td>
                                             <td>
-                                                    <div className="text-[15px] text-left">{item.product_name} fsdfsdf sfsdfsd fsdf sdfsdf sdf sdfsd fasdf sadfas fds fsadfsad fsad fsadf sdf sdfsdfa asd</div>
+                                                    <div className="text-[15px] text-left">{item.product_name}</div>
                                             </td>
                                             <td>
                                                 {item?.quantity}

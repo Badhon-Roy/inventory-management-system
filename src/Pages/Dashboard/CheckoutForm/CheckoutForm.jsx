@@ -117,7 +117,7 @@ const CheckoutForm = ({ id }) => {
                 <span className="text-color"> Pay  ${data?.pay} </span>
                 <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-36 w-24"></span>
             </h2>
-            <div className="px-16 my-16 bg-white p-8">
+            <div className="md:p-16 bg-white">
 
                 <form onSubmit={handleSubmit}>
                     <CardElement
