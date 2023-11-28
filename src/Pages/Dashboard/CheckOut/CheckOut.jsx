@@ -143,7 +143,7 @@ const CheckOut = () => {
                                             <td>
                                                 {item?.quantity}
                                             </td>
-                                            <td>{item?.cost}</td>
+                                            <td>$ {item?.cost}</td>
                                             <td>{item?.sale_count}</td>
                                             <th>
                                                 <button onClick={() => handleSales(item?._id)} className="BTN">Get Paid</button>

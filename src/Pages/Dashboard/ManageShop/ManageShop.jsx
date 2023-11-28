@@ -11,7 +11,7 @@ const ManageShop = () => {
     const form = useRef();
     const [messageText, setMessage] = useState('');
     const [selectedShop, setSelectedShop] = useState(null);
-    const { data  } = useQuery({
+    const { data } = useQuery({
         queryKey: ['shops'],
         queryFn: async () => {
             const res = await axiosSecure.get('/shops')
@@ -45,7 +45,7 @@ const ManageShop = () => {
                         timer: 1500
                     });
                     setMessage('')
-    
+
                     const modal = document.getElementById('my_modal_1');
                     modal.close();
                 }
@@ -54,7 +54,7 @@ const ManageShop = () => {
                 console.error('Error sending email:', error);
             });
     };
-   
+
     const handleClose = () => {
         const modal = document.getElementById('my_modal_1');
         modal.close();
@@ -65,20 +65,21 @@ const ManageShop = () => {
             <h2 className="text-4xl underline text-center font-bold mb-8">All Shop {data?.length} </h2>
             <div className="overflow-x-auto">
                 <table className="table">
-                    <thead>
+                    <thead className="text-center text-[14px]">
                         <tr>
                             <th>
                                 <label>
                                     #
                                 </label>
                             </th>
-                            <th>Shop</th>
+                            <th>Shop Logo</th>
+                            <th>Shop Name</th>
                             <th>Product Limit</th>
-                            <th>Shop Description</th>
+                            <th className="w-2/5">Shop Description</th>
                             <th></th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody className="text-center">
                         {
                             data?.map((shop, index) =>
                                 <tr key={shop?._id}>
@@ -88,25 +89,21 @@ const ManageShop = () => {
                                         </label>
                                     </th>
                                     <td>
-                                        <div className="flex items-center gap-3">
-                                            <div className="avatar">
-                                                <div className="rounded w-12 h-12">
-                                                    <img src={shop?.shop_logo} />
-                                                </div>
-                                            </div>
-                                            <div>
-                                                <div className="font-bold">{shop?.shop_name}</div>
+                                        <div className="avatar">
+                                            <div className="rounded w-12 h-12">
+                                                <img src={shop?.shop_logo} />
                                             </div>
                                         </div>
                                     </td>
+                                    <td>{shop?.shop_name}</td>
                                     <td>{shop?.product_limit}</td>
-                                    <td>{shop?.shop_info}</td>
+                                    <td className="text-left">{shop?.shop_info}</td>
                                     <th>
-                                        <button className="BTN" onClick={() => handleSendNotice(shop)}>Send Notice</button>
+                                        <button className="BTN " onClick={() => handleSendNotice(shop)}>Send Notice</button>
                                         <dialog id="my_modal_1" className="modal">
 
                                             <div className="modal-box relative">
-                                                    <span className="cursor-pointer absolute right-3 top-2 text-xl" onClick={handleClose}>X</span>
+                                                <span className="cursor-pointer absolute right-3 top-2 text-xl" onClick={handleClose}>X</span>
                                                 <h3 className="font-bold mt-4 text-lg text-center mb-3">shop name : <span className="text-color">{selectedShop?.shop_name}</span></h3>
 
                                                 <div className="modal-action">

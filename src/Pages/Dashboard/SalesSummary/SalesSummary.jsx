@@ -2,6 +2,7 @@ import { useContext } from "react";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import { useQuery } from "@tanstack/react-query";
+import SalesHistory from "./SalesHistory";
 
 
 const SalesSummary = () => {
@@ -41,60 +42,17 @@ const SalesSummary = () => {
                     <img className="w-[60px]" src="https://static-00.iconduck.com/assets.00/sale-badge-icon-256x256-slz0mqy5.png" alt="" />
                 </div>
                 <div className="border bg-[#ffe05c] p-8 rounded-md flex justify-between items-center">
-                    <h2 className="text-2xl font-bold">Total Invest <br /> {totalInvest}</h2>
+                    <h2 className="text-2xl font-bold">Total Invest <br /> ${totalInvest}</h2>
                     <img className="w-[60px]" src="https://cdn-icons-png.flaticon.com/512/2394/2394119.png" alt="" />
                 </div>
                 <div className="border bg-[#816ed9] p-8 rounded-md flex justify-between items-center">
                     <h2 className="text-2xl font-bold">Total Profit <br />
-                        {totalProfit}</h2>
+                        ${totalProfit}</h2>
                     <img className="w-[70px]" src="https://cdn-icons-png.flaticon.com/512/4318/4318266.png" alt="" />
                 </div>
             </div>
-            <h2 className="md:text-4xl text-2xl font-bold relative text-center my-16"><span className="text-color">Sales </span> History
-                    <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-48 w-28"></span>
-                </h2>
-            <div className="overflow-x-auto">
-                <table className="table">
-                    <thead>
-                        <tr>
-                            <th>
-                                <label>
-                                    #
-                                </label>
-                            </th>
-                            <th>Product Name</th>
-                            <th>Selling date</th>
-                            <th>Profit</th>
-                            <th></th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        {
-                            sales?.map((item, index) =>
-                                <tr key={item?._id}>
-                                    <th>
-                                        <label>
-                                            {index + 1}
-                                        </label>
-                                    </th>
-                                    <td>
-                                        {item?.product_name}
-                                    </td>
-                                    <td>{item?.sales_date}</td>
-                                    <th>
-                                        {(item?.selling_price - item?.cost)?.toFixed(2)}
-                                    </th>
-                                </tr>
-
-
-
-
-                            )
-                        }
-                    </tbody>
-
-                </table>
-            </div>
+            <SalesHistory sales={sales}></SalesHistory>
+           
         </div>
     );
 };
