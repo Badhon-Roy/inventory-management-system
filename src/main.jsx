@@ -28,11 +28,13 @@ import Payment from './Pages/Dashboard/Payment/Payment';
 import { HelmetProvider } from 'react-helmet-async';
 import AdminSaleSummary from './Pages/Dashboard/AdminSaleSummary/AdminSaleSummary';
 import AdminRoute from './AdminRoute/AdminRoute';
+import ErrorPage from './ErrorPage/ErrorPage';
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <MainLayout></MainLayout>,
+    errorElement : <ErrorPage></ErrorPage>,
     children: [
       {
         path: "/",
