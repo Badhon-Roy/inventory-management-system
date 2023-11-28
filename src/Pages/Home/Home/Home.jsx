@@ -1,9 +1,12 @@
 
 import About from "../About/About";
 import Contact from "../Contact/Contact";
+import CountDown from "../CountDown/CountDown";
 
 
 const Home = () => {
+
+   
     return (
         <div >
             <img className="md:h-[80vh] w-full object-cover " src="https://thetechportal.com/wp-content/uploads/2021/10/ecommerce-10.jpg" alt="" />
@@ -45,6 +48,7 @@ const Home = () => {
                     </div>
                 </div>
             </section>
+           <CountDown></CountDown>
             <Contact></Contact>
         </div>
     );

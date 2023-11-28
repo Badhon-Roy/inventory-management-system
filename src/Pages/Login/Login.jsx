@@ -13,8 +13,8 @@ const Login = () => {
     const [errorMassage, setErrorMassage] = useState(null)
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
-    const [isManager, isManagerLoading, managerRefetch] = useManager()
-    const [isAdmin, isAdminLoading, adminRefetch] = useAdmin();
+    const [isManager, , managerRefetch] = useManager()
+    const [isAdmin,, adminRefetch] = useAdmin();
 
     const { googleSignIn, signIn } = useContext(AuthContext)
     const handleLogin = e => {
@@ -50,9 +50,7 @@ const Login = () => {
                 console.log(error);
             })
     }
-    if (isAdminLoading || isManagerLoading) {
-        return <p>Loading.........</p>
-    }
+    
     if (isAdmin) {
         console.log(isManager, isAdmin);
         navigate('/dashboard/manageShop')
@@ -61,6 +59,9 @@ const Login = () => {
         console.log(isManager, isAdmin);
         navigate('/dashboard/productManagement')
     }
+    // if (isAdminLoading || isManagerLoading) {
+    //     return <p>Loading.........</p>
+    // }
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
     }
