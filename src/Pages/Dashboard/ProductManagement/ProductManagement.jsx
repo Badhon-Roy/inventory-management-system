@@ -31,6 +31,8 @@ const ProductManagement = () => {
         </div>
     }
     const limit = shopData?.product_limit;
+    const limited = shopData?.map(item => item?.product_limit)
+    console.log(limited[0]);
 
     const handleDelete = id => {
         Swal.fire({
