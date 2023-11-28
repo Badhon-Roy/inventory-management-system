@@ -25,6 +25,24 @@ const AdminSaleSummary = () => {
         return { user, shop: matchedShop };
     });
 
+
+    const itemsPerPage = 10;
+    const maxPagesToShow = 4
+    const [currentPage, setCurrentPage] = useState(1);
+    const lastItem = currentPage * itemsPerPage;
+    const firstItem = lastItem - itemsPerPage;
+    const currentItems = matchedUsersAndShops?.slice(firstItem, lastItem)
+    const totalPages = Math.ceil(matchedUsersAndShops?.length / itemsPerPage);
+    const startPage = Math.max(1, currentPage - Math.floor(maxPagesToShow / 2));
+    const endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
+    const handlePageChange = (page) => {
+        setCurrentPage(page);
+        console.log('change page', page);
+    };
+
+
+
+
     const handleSendNotice = (user) => {
         setSelectedUser(user);
         document.getElementById('my_modal_1').showModal();
@@ -52,11 +70,11 @@ const AdminSaleSummary = () => {
                         </tr>
                     </thead>
                     <tbody>
-                        {matchedUsersAndShops?.map(({ user, shop }, index) => (
+                        {currentItems?.map(({ user, shop }, index) => (
                             <tr key={user?._id}>
                                 <th>
                                     <label>
-                                        {index + 1}
+                                    {index + 1 + firstItem}
                                     </label>
                                 </th>
                                 <td>{user?.name}</td>
@@ -91,6 +109,39 @@ const AdminSaleSummary = () => {
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div className="pagination flex items-center justify-center my-5">
+                <button
+                    className="BTN"
+                    onClick={() => handlePageChange(currentPage - 1)}
+                    disabled={currentPage === 1}
+                >
+                    Prev
+                </button>
+                <span className="mx-2 text-blue-500 font-bold rounded-full px-2 border-blue-500 border-2">1</span>
+                {Array.from({ length: endPage - startPage + 1 }, (_, i) => startPage + i).map((page) => (
+                    
+                    <label key={page} className="mx-5">
+                        
+                        <input
+                            type="radio"
+                            name="pagination"
+                            value={page}
+                            checked={currentPage === page}
+                            className="mx-2 cursor-pointer"
+                            onChange={() => handlePageChange(page)}
+                        />
+                        {page}
+                    </label>
+                ))}
+                <span className="mx-2 text-blue-500 font-bold rounded-full px-1 border-blue-500 border-2">...{totalPages}</span>
+                <button
+                    className="BTN"
+                    onClick={() => handlePageChange(currentPage + 1)}
+                    disabled={currentPage === totalPages}
+                >
+                    Next
+                </button>
             </div>
         </div>
     );
