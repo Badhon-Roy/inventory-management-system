@@ -21,7 +21,18 @@ const CheckoutForm = ({ id }) => {
             return res.data
         }
     })
-    const offerLimit = parseInt(data?.limit) || 1;
+    // const { data : users , isLoading : userLoading } = useQuery({
+    //     queryKey: ['users'],
+    //     queryFn: async () => {
+    //         const res = await axiosSecure.get('/users')
+    //         return res.data
+    //     }
+    // })
+    // console.log(users);
+    const offerLimit = parseInt(data?.limit) || 0;
+    const offerPay = parseInt(data?.pay) || 0;
+
+    console.log(offerPay);
 
    
 
@@ -97,7 +108,7 @@ const CheckoutForm = ({ id }) => {
                 console.log("transaction id", paymentIntent.id);
                 setTransactionId(paymentIntent.id)
                 const incrementInfo = {
-                    product_limit: 100
+                    product_limit: offerLimit
                 }
                 axiosSecure.put(`/shops/${shopId}/increment?limit=${offerLimit}`, incrementInfo)
                     .then(res => {

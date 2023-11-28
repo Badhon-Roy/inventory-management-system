@@ -61,7 +61,6 @@ const Dashboard = () => {
                 <div className="drawer md:drawer-open">
                     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />
                     <div className="drawer-content md:ml-5 py-16 px-4">
-                        {/* Page content here */}
                         <Outlet></Outlet>
                         <label htmlFor="my-drawer-2" className="btn text-2xl absolute left-3 top-1 btn-primary drawer-button lg:hidden"><GiHamburgerMenu></GiHamburgerMenu></label>
 

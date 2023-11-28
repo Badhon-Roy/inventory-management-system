@@ -13,8 +13,8 @@ const Login = () => {
     const [errorMassage, setErrorMassage] = useState(null)
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
-    const [isManager] = useManager()
-    const [isAdmin] = useAdmin();
+    const [isManager, isManagerLoading, managerRefetch] = useManager()
+    const [isAdmin, isAdminLoading, adminRefetch] = useAdmin();
 
     const { googleSignIn, signIn } = useContext(AuthContext)
     const handleLogin = e => {
@@ -23,12 +23,10 @@ const Login = () => {
         const password = e.target.password.value;
         signIn(email, password)
             .then(res => {
-                console.log(res.user);
-                {
-                    isManager && navigate('/dashboard')
-                }
+                console.log(res.data);
                 swal("Log in", "successful", "success")
-                e.target.reset();
+                adminRefetch()
+                managerRefetch()
             })
             .catch(() => {
                 setErrorMassage('login failed please check your email and password and try again');
@@ -43,15 +41,25 @@ const Login = () => {
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         console.log(res.data);
-                        {
-                            isAdmin && navigate('/dashboard' || '/')
-                        }
                         swal("Log in", "successful", "success")
+                        adminRefetch()
+                        managerRefetch()
                     })
             })
             .catch(error => {
                 console.log(error);
             })
+    }
+    if (isAdminLoading || isManagerLoading) {
+        return <p>Loading.........</p>
+    }
+    if (isAdmin) {
+        console.log(isManager, isAdmin);
+        navigate('/dashboard/manageShop')
+    }
+    if (isManager) {
+        console.log(isManager, isAdmin);
+        navigate('/dashboard/productManagement')
     }
     const handleShowPassword = () => {
         setShowPassword(!showPassword)

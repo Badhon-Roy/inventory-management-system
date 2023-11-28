@@ -5,17 +5,20 @@ import { useQuery } from "@tanstack/react-query";
 
 
 const useManager = () => {
-    const {user} = useContext(AuthContext)
+    const { user, loading } = useContext(AuthContext)
     const axiosSecure = useAxiosSecure()
-    const {data : isManager} = useQuery({
-        queryKey : [user?.email , "isManager"],
-        queryFn : async() => {
-            const res = await axiosSecure.get(`/users/manager/${user.email}`);
-            console.log(res.data);
-            return res.data?.manager;
+    const { data: isManager,isLoading: isManagerLoading , refetch : managerRefetch } = useQuery({
+        queryKey: [user?.email, "isManager"],
+        enabled: !loading && !!user?.email && !!localStorage.getItem('access-token'),
+        queryFn: async () => {
+            if (user?.email) {
+                const res = await axiosSecure.get(`/users/manager/${user.email}`);
+                console.log(res.data);
+                return res.data?.manager;
+            }
         }
     });
-    return [isManager]
+    return [isManager , isManagerLoading , managerRefetch]
 };
 
 export default useManager;

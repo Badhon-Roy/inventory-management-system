@@ -101,7 +101,9 @@ const CheckOut = () => {
         <div>
             {
                 data?.length > 0 ? <div>
-                    <h2 className="md:text-4xl text-2xl text-center mb-8 underline">Total {data?.length} products is Check Out </h2>
+                    <h2 className="md:text-4xl text-2xl font-bold relative text-center mb-16"> Total  {data?.length}  Product <span className="text-color"> Check Out </span>
+                        <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-52 w-24"></span>
+                    </h2>
                     <div className="overflow-x-auto">
                         <table className="table">
                             {/* head */}

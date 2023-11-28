@@ -9,8 +9,8 @@ import { RiLogoutCircleLine } from "react-icons/ri";
 const Navbar = () => {
     const { user, logOut } = useContext(AuthContext)
 
-    const [isManager] = useManager()
-    const [isAdmin] = useAdmin()
+    const [isManager ] = useManager()
+    const [isAdmin ] = useAdmin()
 
     const handleLogOut = () => {
         logOut()
