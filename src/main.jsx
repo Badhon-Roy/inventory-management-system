@@ -30,6 +30,7 @@ import AdminSaleSummary from './Pages/Dashboard/AdminSaleSummary/AdminSaleSummar
 import AdminRoute from './AdminRoute/AdminRoute';
 import ErrorPage from './ErrorPage/ErrorPage';
 import ForbiddenPage from './ForbiddenPage/ForbiddenPage';
+import ManagerRoute from './ManagerRoute/ManagerRoute';
 
 const router = createBrowserRouter([
   {
@@ -82,37 +83,37 @@ const router = createBrowserRouter([
       // manager related 
       {
         path: "productManagement",
-        element: <ProductManagement></ProductManagement>
+        element: <ManagerRoute><ProductManagement></ProductManagement></ManagerRoute>
       },
       {
         path: "addProduct",
-        element: <AddProduct></AddProduct>
+        element: <ManagerRoute><AddProduct></AddProduct></ManagerRoute>
       },
       {
         path: "updateProduct/:id",
-        element: <UpdateProduct></UpdateProduct>
+        element: <ManagerRoute><UpdateProduct></UpdateProduct></ManagerRoute>
       }
       ,
       {
         path: "payment/:id",
-        element: <Payment></Payment>
+        element: <ManagerRoute><Payment></Payment></ManagerRoute>
       }
       ,
       {
         path: "salesCollection",
-        element: <SalesCollection></SalesCollection>
+        element: <ManagerRoute><SalesCollection></SalesCollection></ManagerRoute>
       },
       {
         path: "checkOut",
-        element: <CheckOut></CheckOut>
+        element: <ManagerRoute><CheckOut></CheckOut></ManagerRoute>
       },
       {
         path: "subscriptionAndPayment",
-        element: <SubscriptionAndPayment></SubscriptionAndPayment>
+        element: <ManagerRoute><SubscriptionAndPayment></SubscriptionAndPayment></ManagerRoute>
       },
       {
         path: "salesSummary",
-        element: <SalesSummary></SalesSummary>
+        element: <ManagerRoute><SalesSummary></SalesSummary></ManagerRoute>
       }
     ]
   }
