@@ -2,6 +2,7 @@
 import About from "../About/About";
 import Contact from "../Contact/Contact";
 import CountDown from "../CountDown/CountDown";
+import Testimonial from "../Testimonial/Testimonial";
 
 
 const Home = () => {
@@ -9,7 +10,7 @@ const Home = () => {
    
     return (
         <div >
-            <img className="md:h-[80vh] w-full object-cover " src="https://thetechportal.com/wp-content/uploads/2021/10/ecommerce-10.jpg" alt="" />
+            <img className="md:h-[700px] w-full object-cover " src="https://www.corporatevision-news.com/wp-content/uploads/2021/12/Inventory.jpg" alt="" />
             <About />
             <section className="md:mx-0 mx-4">
                 <h2 className="md:text-4xl text-2xl font-bold relative text-center my-16">
@@ -49,6 +50,7 @@ const Home = () => {
                 </div>
             </section>
            <CountDown></CountDown>
+           <Testimonial></Testimonial>
             <Contact></Contact>
         </div>
     );
