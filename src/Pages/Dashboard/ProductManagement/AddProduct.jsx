@@ -23,7 +23,6 @@ const AddProduct = () => {
             return res.data;
         }
     })
-    console.log(data);
     const shop_id = data?._id
     const shop_name = data?.shop_name
     const navigate = useNavigate()

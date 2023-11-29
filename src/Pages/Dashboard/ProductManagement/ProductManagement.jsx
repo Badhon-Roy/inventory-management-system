@@ -1,5 +1,5 @@
 import { useQuery } from "@tanstack/react-query";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { useContext } from "react";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
@@ -9,6 +9,7 @@ import Swal from "sweetalert2";
 
 const ProductManagement = () => {
     const axiosSecure = useAxiosSecure()
+    const navigate = useNavigate()
     const { user } = useContext(AuthContext)
     const { data, isLoading, refetch } = useQuery({
         queryKey: ['products'],
@@ -30,9 +31,8 @@ const ProductManagement = () => {
             <span className="loading loading-spinner loading-lg"></span>
         </div>
     }
-    const limit = shopData?.product_limit;
-    const limited = shopData?.map(item => item?.product_limit)
-    console.log(limited[0]);
+    const limit = shopData?.map(item => item?.product_limit)
+    console.log(limit[0]);
 
     const handleDelete = id => {
         Swal.fire({
@@ -61,6 +61,22 @@ const ProductManagement = () => {
         })
 
     }
+    const handleAdd = () =>{
+        Swal.fire({
+            title: `Your limit is over 
+             Can not add more Product.`,
+            text: "If you want to add more products , increase the limit by purchasing Subscription",
+            icon: "warning",
+            showCancelButton: true,
+            confirmButtonColor: "#3085d6",
+            cancelButtonColor: "#d33",
+            confirmButtonText: "Yes, do it!"
+          }).then((result) => {
+            if (result.isConfirmed) {
+              navigate('/dashboard/subscriptionAndPayment')
+            }
+          });
+    }
     return (
         <div>
             {
@@ -70,9 +86,8 @@ const ProductManagement = () => {
                         <h2 className="text-xl font-bold">Total {data?.length} product added</h2>
                     </div>
                     {
-                        data?.length >= limit ? <Link to="/dashboard/subscriptionAndPayment">
-                            <button className="BTN">Add Product</button>
-                        </Link> : <Link to="/dashboard/addProduct">
+                        data?.length >= limit[0] ? 
+                            <button onClick={handleAdd} className="BTN">Add Product</button> : <Link to="/dashboard/addProduct">
                             <button className="BTN">Add Product</button>
                         </Link>
                     }

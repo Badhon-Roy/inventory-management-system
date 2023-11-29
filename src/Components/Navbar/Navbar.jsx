@@ -1,5 +1,5 @@
 import { Link, NavLink } from "react-router-dom";
-import logoImg from "../../assets/images/logo1-removebg-preview.png"
+// import logoImg from "../../assets/images/logo1-removebg-preview.png"
 import { useContext } from "react";
 import { AuthContext } from "../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";

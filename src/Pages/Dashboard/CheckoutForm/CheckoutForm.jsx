@@ -3,11 +3,13 @@ import { useContext, useEffect, useState } from "react";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 import { AuthContext } from "../../../AuthProvider/AuthProvider";
+import Swal from "sweetalert2";
 
 
 const CheckoutForm = ({ id }) => {
     const { user } = useContext(AuthContext)
     const stripe = useStripe();
+    const [isClick, setIsClick] = useState(false)
     const [clientSecret, setClientSecret] = useState("");
     const [transactionId, setTransactionId] = useState('')
     const [shopId, setShopId] = useState('')
@@ -21,22 +23,23 @@ const CheckoutForm = ({ id }) => {
             return res.data
         }
     })
-    // const { data : users , isLoading : userLoading } = useQuery({
-    //     queryKey: ['users'],
-    //     queryFn: async () => {
-    //         const res = await axiosSecure.get('/users')
-    //         return res.data
-    //     }
-    // })
-    // console.log(users);
+    const { data: users } = useQuery({
+        queryKey: ['users'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/users');
+            return res.data;
+        },
+        select: (data) => {
+            return data?.find(user => user.role === 'admin');
+        },
+    });
+
     const offerLimit = parseInt(data?.limit) || 0;
     const offerPay = parseInt(data?.pay) || 0;
 
-    console.log(offerPay);
 
-   
 
-    const { data: shopData , isLoading : shopDataLoading } = useQuery({
+    const { data: shopData, isLoading: shopDataLoading } = useQuery({
         queryKey: ['product_limit', user?.email],
         queryFn: async () => {
             const res = await axiosSecure.get(`/shops?shop_owner_email=${user.email}`)
@@ -100,15 +103,27 @@ const CheckoutForm = ({ id }) => {
             setError(confirmError.message)
         }
         if (paymentIntent) {
-            console.log("paymentIntent", paymentIntent);
             if (paymentIntent.status === 'succeeded') {
                 setTransactionId(paymentIntent.id)
-                const incrementInfo = {
-                    product_limit: offerLimit
-                }
-                axiosSecure.put(`/shops/${shopId}/increment?limit=${offerLimit}`, incrementInfo)
-                    .then(res => {
-                        console.log(res.data);
+                Promise.all([
+                    axiosSecure.put(`/shops/${shopId}/increment?limit=${offerLimit}`),
+                    axiosSecure.put(`/users/${users?.email}/increment?income=${offerPay}`)
+
+                ])
+                    .then(([shopRes, userRes]) => {
+                        const isShopSuccess = shopRes.data.modifiedCount > 0;
+                        const isUserSuccess = userRes.data.modifiedCount > 0;
+                        if (isShopSuccess && isUserSuccess) {
+                            setIsClick(true)
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Payment successful",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                        }
+
                     })
             }
         }
@@ -120,7 +135,7 @@ const CheckoutForm = ({ id }) => {
     }
     return (
         <div>
-            <h2 className="md:text-4xl text-2xl font-bold relative text-center mb-16"> Please 
+            <h2 className="md:text-4xl text-2xl font-bold relative text-center mb-16"> Please
                 <span className="text-color"> Pay  ${data?.pay} </span>
                 <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-36 w-24"></span>
             </h2>
@@ -143,7 +158,7 @@ const CheckoutForm = ({ id }) => {
                             },
                         }}
                     />
-                    <button className="BTN my-4" type="submit" disabled={!stripe || !clientSecret}>
+                    <button className="BTN my-4" type="submit" disabled={!stripe || !clientSecret || isClick}>
                         Pay
                     </button>
                     <p className="text-red-600">{error}</p>
