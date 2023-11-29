@@ -1,10 +1,13 @@
-import { useRef } from 'react';
+import { useEffect, useRef } from 'react';
 import 'swiper/css';
 import 'swiper/css/pagination';
 import 'swiper/css/navigation';
 import "./Testimonial.css"
 import { Autoplay, Pagination, Navigation } from 'swiper/modules';
 import { Swiper, SwiperSlide } from 'swiper/react';
+import 'aos/dist/aos.css';
+import AOS from 'aos';
+
 
 const Testimonial = () => {
     const progressCircle = useRef(null);
@@ -13,9 +16,15 @@ const Testimonial = () => {
         progressCircle.current.style.setProperty('--progress', 1 - progress);
         progressContent.current.textContent = `${Math.ceil(time / 1000)}s`;
     };
+    useEffect(() => {
+        AOS.init({
+            duration: 500,
+            offset: 200,
+        });
+    }, []);
     return (
         <div className='md:mx-32 mx-4'>
-            <h2 className="md:text-4xl text-2xl font-bold relative text-center mt-16 mb-8"> What
+            <h2 data-aos="fade-right" className="md:text-4xl text-2xl font-bold relative text-center mt-16 mb-8"> What
                 <span className="text-color"> Our Client </span> Are Saying
                 <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-48 w-16"></span>
             </h2>

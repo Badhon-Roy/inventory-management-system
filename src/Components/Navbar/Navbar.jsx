@@ -28,15 +28,16 @@ const Navbar = () => {
     }
     return (
         <div className="bg-gray-400 sticky top-0 z-10 ">
-            <div className="navbar max-w-[1600px] mx-auto lg:px-16 md:px-8 py-4">
+            <div className="navbar max-w-[1600px] mx-auto lg:px-16 md:px-8 py-2">
                 <div className="navbar-start">
                     <div className="dropdown">
                         <label tabIndex={0} className="btn btn-ghost lg:hidden">
                             <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"><path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /></svg>
                         </label>
-                        <ul tabIndex={0} className="menu menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
-                            <li><NavLink
+                        <ul tabIndex={0} className="menu-sm dropdown-content mt-3 z-[1] p-2 shadow bg-base-100 rounded-box w-52">
+                            <li className="bg-gray-200"><NavLink
                                 to="/"
+                                style={{ width: '100%', display: 'block', paddingLeft: '10px' }}
                                 className={({ isActive, isPending }) =>
                                     isPending ? "pending" : isActive ? "text-red-600" : ""
                                 }
@@ -45,9 +46,10 @@ const Navbar = () => {
                             </NavLink></li>
 
                             {isManager || isAdmin ? (
-                                <li>
+                                <li  className="bg-gray-200 mt-2">
                                     <NavLink
                                         to={isManager ? "/dashboard/productManagement" : isAdmin ? "/dashboard/manageShop" : ""}
+                                        style={{ width: '100%', display: 'block', paddingLeft: '10px' }}
                                         className={({ isActive, isPending }) =>
                                             isPending ? "pending" : isActive ? "text-red-600" : ""
                                         }
@@ -56,9 +58,10 @@ const Navbar = () => {
                                     </NavLink>
                                 </li>
                             ) : (
-                                <li>
+                                <li  className="bg-gray-200 mt-2">
                                     <NavLink
                                         to="/createStore"
+                                        style={{ width: '100%', display: 'block', paddingLeft: '10px' }}
                                         className={({ isActive, isPending }) =>
                                             isPending ? "pending" : isActive ? "text-red-600" : ""
                                         }
@@ -69,18 +72,11 @@ const Navbar = () => {
                             )}
 
 
-                            <li><NavLink
-                                to="/watchDemo"
-                                className={({ isActive, isPending }) =>
-                                    isPending ? "pending" : isActive ? "text-red-600" : ""
-                                }
-                            >
-                                Watch Demo
-                            </NavLink></li>
+                            <li  className="bg-gray-200 mt-2"><a href="https://youtu.be/Ea17VdZmHxk?si=ZxamnHhduQjT06iJ" target="blank">Watch Demo</a></li>
                         </ul>
                     </div>
                     <Link to="/" className="ml-4">
-                        <img className="w-2/5" src='https://www.evidentbd.com/assets/INVENTORY-01.7844cb45.png' alt="" />
+                        <img className="md:w-[120px] w-[100px]" src='https://ng-inventual.vercel.app/assets/img/logo/logo.png' alt="" />
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">

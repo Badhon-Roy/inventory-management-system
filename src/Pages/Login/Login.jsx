@@ -42,9 +42,9 @@ const Login = () => {
                     .then(res => {
                         console.log(res.data);
                         swal("Log in", "successful", "success")
-                        window.location.reload()
                         adminRefetch()
                         managerRefetch()
+                        window.location.reload()
                     })
             })
             .catch(error => {

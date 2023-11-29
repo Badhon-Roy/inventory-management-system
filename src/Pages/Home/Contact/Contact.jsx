@@ -1,38 +1,47 @@
+import 'aos/dist/aos.css';
+import AOS from 'aos';
 
 import { VscSend } from "react-icons/vsc";
+import { useEffect } from 'react';
 
 
 const Contact = () => {
+    useEffect(() => {
+        AOS.init({
+            duration: 500,
+            offset: 200,
+        });
+    }, []);
     return (
         <div className="md:mx-0 mx-4">
-            <h2 className="md:text-4xl text-2xl font-bold relative text-center my-16">
+            <h2 data-aos="fade-right" className="md:text-4xl text-2xl font-bold relative text-center my-16">
                 Contact <span className="text-color">Us</span>
                 <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-36 w-20"></span>
             </h2>
 
-            <div className="my-16 grid md:grid-cols-4 gap-5">
-                <div className="border p-8 text-center shadow-lg rounded-lg">
+            <div className="my-16 grid lg:grid-cols-4 md:grid-cols-2 grid-cols-1 gap-5">
+                <div data-aos="flip-left" className="cursor-pointer border hover:border-2 hover:border-[#ff792e] p-8 text-center shadow hover:shadow-2xl rounded-lg">
                     <span className="flex justify-center">
                         <img className="w-[120px] mb-4" src="https://cdn-icons-png.flaticon.com/512/4942/4942069.png" alt="" />
                     </span>
                     <h2 className="text-xl font-bold my-2">Address</h2>
                     <p>6890 Blvd, The Bronx, NY 1058, USA</p>
                 </div>
-                <div className="border p-8 text-center shadow-lg rounded-lg">
+                <div data-aos="flip-left" className="cursor-pointer border hover:border-2 p-8 text-center shadow hover:border-[#ff792e] hover:shadow-2xl rounded-lg">
                     <span className="flex justify-center">
                         <img className="w-[120px] mb-4" src="https://static.vecteezy.com/system/resources/thumbnails/025/225/156/small/3d-illustration-icon-of-phone-call-with-circular-or-round-podium-png.png" alt="" />
                     </span>
                     <h2 className="text-xl font-bold my-2">Phone</h2>
                     <p>Hotline: 16798 <br />Tech support: (+123) 456-7898</p>
                 </div>
-                <div className="border p-8 text-center shadow hover:shadow-2xl rounded-lg">
+                <div data-aos="flip-right" className="cursor-pointer border hover:border-2 p-8 text-center shadow hover:border-[#ff792e] hover:shadow-2xl rounded-lg">
                     <span className="flex justify-center">
                         <img className="w-[100px] mb-4" src="https://assets.stickpng.com/images/584856bce0bb315b0f7675ad.png" alt="" />
                     </span>
                     <h2 className="text-xl font-bold my-2">Email</h2>
-                    <p>hello@dream.com <br /> Skype: hello.dream</p>
+                    <p>hello@provision.com <br /> Skype: hello.proVision</p>
                 </div>
-                <div className="border p-8 text-center shadow-lg rounded-lg">
+                <div data-aos="flip-right" className="cursor-pointer border hover:border-2 p-8 text-center shadow hover:border-[#ff792e] hover:shadow-2xl rounded-lg">
                     <span className="flex justify-center">
                         <img className="w-[100px] mb-4" src="https://cdn-icons-png.flaticon.com/512/5929/5929568.png" alt="" />
                     </span>

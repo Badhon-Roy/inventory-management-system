@@ -1,15 +1,23 @@
-
+import 'aos/dist/aos.css';
+import AOS from 'aos';
+import { useEffect } from 'react';
 const About = () => {
     const textShadowStyle = {
         textShadow: '-5px 10px 4px rgba(0, 0, 0, 0.20)', // Adjust the values as needed
     };
+    useEffect(() => {
+        AOS.init({
+            duration: 500,
+            offset: 200,
+        });
+    }, []);
     return (
         <div className="md:mx-0 mx-4">
-            <h2 className="md:text-4xl text-2xl font-bold relative text-center my-16">
+            <h2 data-aos="fade-right"  className="md:text-4xl text-2xl font-bold relative text-center md:my-16 my-8">
                 <span className="text-color">About </span> Us
                 <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-28 w-16"></span>
             </h2>
-            <div className="md:flex items-center gap-5">
+            <div data-aos="zoom-in-right" className="md:flex items-center gap-5">
                 <div className="flex-1">
                     <p className="text-color">We believe in less but better</p>
                     <h2 className="md:text-4xl text-2xl font-bold"><span className="md:text-5xl text-3xl ">Welcome</span> to MedQ! The purpose of your service is to create our MedQ. So we always want to be...</h2>
