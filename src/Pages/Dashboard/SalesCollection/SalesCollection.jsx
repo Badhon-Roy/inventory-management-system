@@ -123,10 +123,8 @@ const SalesCollection = () => {
                                                 <th></th>
                                             </tr>
                                         </thead>
-                                        <tbody className="text-center">
-                                            {
-                                                isSearch ? <>{
-                                                    searchProducts?.map((item, index) =>
+                                        <tbody className="text-center">{
+                                                isSearch ? <>{searchProducts?.map((item, index) =>
                                                         <tr key={item._id}>
                                                             <th>
                                                                 <label>

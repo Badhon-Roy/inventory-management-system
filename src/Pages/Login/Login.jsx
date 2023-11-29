@@ -13,8 +13,8 @@ const Login = () => {
     const [errorMassage, setErrorMassage] = useState(null)
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
-    const [isManager, isManagerLoading, managerRefetch] = useManager()
-    const [isAdmin,isAdminLoading, adminRefetch] = useAdmin();
+    const [isManager, , managerRefetch] = useManager()
+    const [isAdmin,, adminRefetch] = useAdmin();
 
     const { googleSignIn, signIn } = useContext(AuthContext)
     const handleLogin = e => {
@@ -42,6 +42,7 @@ const Login = () => {
                     .then(res => {
                         console.log(res.data);
                         swal("Log in", "successful", "success")
+                        window.location.reload()
                         adminRefetch()
                         managerRefetch()
                     })

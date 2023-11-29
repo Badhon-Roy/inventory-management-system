@@ -36,6 +36,7 @@ const AddProduct = () => {
         const textPercentage = 7.5;
         const SellingPrice =(data.productionCost + (data.productionCost * textPercentage / 100)  + (data.productionCost * data.profitMargin /100)).toFixed(2);
         const imageFile = { image: data.image[0] }
+        console.log(imageFile);
         const res = await axiosPublic.post(image_hosting_api, imageFile, {
             headers: {
                 'content-type': 'multipart/form-data'

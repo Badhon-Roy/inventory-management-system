@@ -62,7 +62,9 @@ const ManageShop = () => {
 
     return (
         <div>
-            <h2 className="text-4xl underline text-center font-bold mb-8">All Shop {data?.length} </h2>
+            <h2 className="md:text-4xl text-2xl font-bold relative text-center mb-8">All <span className="text-color">Shops {data?.length} </span> 
+                <span className="absolute -bottom-1 left-1/2 transform -translate-x-1/2 border-b-4 border-[#ff792e] md:w-48 w-28"></span>
+            </h2>
             <div className="overflow-x-auto">
                 <table className="table">
                     <thead className="text-center text-[14px]">
