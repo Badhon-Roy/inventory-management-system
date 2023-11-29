@@ -1,5 +1,5 @@
 
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 import { FaRegEye, FaRegEyeSlash } from 'react-icons/fa';
 import { Link, useNavigate } from 'react-router-dom';
 import swal from "sweetalert";
@@ -13,8 +13,8 @@ const Login = () => {
     const [errorMassage, setErrorMassage] = useState(null)
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
-    const [isManager, , managerRefetch] = useManager()
-    const [isAdmin,, adminRefetch] = useAdmin();
+    const [isManager, isManagerLoading, managerRefetch] = useManager()
+    const [isAdmin,isAdminLoading, adminRefetch] = useAdmin();
 
     const { googleSignIn, signIn } = useContext(AuthContext)
     const handleLogin = e => {
@@ -51,17 +51,19 @@ const Login = () => {
             })
     }
     
-    if (isAdmin) {
-        console.log(isManager, isAdmin);
-        navigate('/dashboard/manageShop')
-    }
-    if (isManager) {
-        console.log(isManager, isAdmin);
-        navigate('/dashboard/productManagement')
-    }
-    // if (isAdminLoading || isManagerLoading) {
-    //     return <p>Loading.........</p>
-    // }
+    useEffect(()=>{
+        console.log('admin' , isAdmin);
+        console.log('manager' , isManager);
+        if (isAdmin) {
+            console.log(isManager, isAdmin);
+            navigate('/dashboard/manageShop')
+        }
+        if (isManager) {
+            console.log(isManager, isAdmin);
+            navigate('/dashboard/productManagement')
+        }
+
+    },[isManager , isAdmin , navigate ])
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
     }

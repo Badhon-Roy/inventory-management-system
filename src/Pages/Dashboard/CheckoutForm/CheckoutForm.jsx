@@ -59,7 +59,6 @@ const CheckoutForm = ({ id }) => {
         }
         axiosSecure.post("/create-payment-intent", payInfo)
             .then(res => {
-                console.log(res.data.clientSecret);
                 setClientSecret(res.data.clientSecret)
             })
     }, [axiosSecure, data?.pay])
@@ -78,7 +77,6 @@ const CheckoutForm = ({ id }) => {
         });
 
         if (error) {
-            console.log('[error]', error);
             setError(error.message)
         } else {
             console.log('[PaymentMethod]', paymentMethod);
@@ -99,13 +97,11 @@ const CheckoutForm = ({ id }) => {
         );
 
         if (confirmError) {
-            console.log("confirmError", confirmError);
             setError(confirmError.message)
         }
         if (paymentIntent) {
             console.log("paymentIntent", paymentIntent);
             if (paymentIntent.status === 'succeeded') {
-                console.log("transaction id", paymentIntent.id);
                 setTransactionId(paymentIntent.id)
                 const incrementInfo = {
                     product_limit: offerLimit

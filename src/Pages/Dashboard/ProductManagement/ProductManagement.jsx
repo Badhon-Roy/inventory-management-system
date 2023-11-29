@@ -64,7 +64,7 @@ const ProductManagement = () => {
     return (
         <div>
             {
-                data.length > 0 ? <div className="flex border rounded justify-between items-center">
+                data?.length > 0 ? <div className="flex border rounded justify-between items-center">
                     <div className="flex items-center gap-2 ml-5">
                         <img className="w-[42px]" src="https://cdn3d.iconscout.com/3d/premium/thumb/product-5806313-4863042.png" alt="" />
                         <h2 className="text-xl font-bold">Total {data?.length} product added</h2>

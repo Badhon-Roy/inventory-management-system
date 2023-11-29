@@ -80,7 +80,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <Link to="/" className="ml-4">
-                        <img className="" src={logoImg} alt="" />
+                        <img  className="w-2/5" src='https://www.evidentbd.com/assets/INVENTORY-01.7844cb45.png' alt="" />
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
