@@ -80,7 +80,7 @@ const Navbar = () => {
                         </ul>
                     </div>
                     <Link to="/" className="ml-4">
-                        <img  className="w-2/5" src='https://www.evidentbd.com/assets/INVENTORY-01.7844cb45.png' alt="" />
+                        <img className="w-2/5" src='https://www.evidentbd.com/assets/INVENTORY-01.7844cb45.png' alt="" />
                     </Link>
                 </div>
                 <div className="navbar-center hidden lg:flex">
@@ -119,14 +119,7 @@ const Navbar = () => {
                         )}
 
 
-                        <li><NavLink
-                            to="/watchDemo"
-                            className={({ isActive, isPending }) =>
-                                isPending ? "pending" : isActive ? "text-red-600" : ""
-                            }
-                        >
-                            Watch Demo
-                        </NavLink></li>
+                        <li><a href="https://youtu.be/Ea17VdZmHxk?si=ZxamnHhduQjT06iJ" target="blank">Watch Demo</a></li>
                     </ul>
                 </div>
                 <div className="navbar-end">

@@ -29,6 +29,7 @@ import { HelmetProvider } from 'react-helmet-async';
 import AdminSaleSummary from './Pages/Dashboard/AdminSaleSummary/AdminSaleSummary';
 import AdminRoute from './AdminRoute/AdminRoute';
 import ErrorPage from './ErrorPage/ErrorPage';
+import ForbiddenPage from './ForbiddenPage/ForbiddenPage';
 
 const router = createBrowserRouter([
   {
@@ -55,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "/signUp",
         element: <SignUp></SignUp>
+      },
+      {
+        path : "/forbiddenAccess",
+        element : <ForbiddenPage></ForbiddenPage>
       }
     ]
   },
