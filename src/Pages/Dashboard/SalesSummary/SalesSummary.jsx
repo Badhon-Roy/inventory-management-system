@@ -21,8 +21,15 @@ const SalesSummary = () => {
     const { data: sales } = useQuery({
         queryKey: ['sales', user?.email],
         queryFn: async () => {
-            const res = await axiosSecure.get(`/sales?email=${user.email}`)
-            return res.data
+            const res = await axiosSecure.get(`/sales?email=${user.email}`);
+            const sortedData = res.data.map(item => ({
+                ...item,
+                sales_date: new Date(item.sales_date),
+            }));
+
+            sortedData.sort((a, b) => b.sales_date - a.sales_date);
+
+            return sortedData;
         }
     })
 

@@ -13,9 +13,6 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
-// import { useQuery } from "@tanstack/react-query";
-// import useAxiosSecure from "../../../Hook/useAxiosSecure";
-
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
@@ -96,7 +93,7 @@ const Dashboard = () => {
                                             {
                                                shopData && shopData?.length > 0 ?
                                                <div className="flex justify-center">
-                                                <img className="w-[80px]" src={shopLogo} alt="" />
+                                                <img className="w-[80px] mb-5" src={shopLogo} alt="" />
                                                </div> : <p>No Logo</p>
                                             }
                                                 

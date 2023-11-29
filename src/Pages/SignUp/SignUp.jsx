@@ -54,8 +54,8 @@ const SignUp = () => {
                                         showConfirmButton: false,
                                         timer: 1500
                                     });
+                                    navigate('/createStore');
                                     window.location.reload()
-                                    navigate('/');
                                 }
                             })
                     })

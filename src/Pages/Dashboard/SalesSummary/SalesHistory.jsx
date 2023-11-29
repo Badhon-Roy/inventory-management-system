@@ -11,9 +11,7 @@ const SalesHistory = ({ sales }) => {
     const endPage = Math.min(totalPages, startPage + maxPagesToShow - 1);
     const handlePageChange = (page) => {
         setCurrentPage(page);
-        console.log('change page', page);
     };
-    console.log(currentPage);
     return (
         <div>
             <h2 className="md:text-4xl text-2xl font-bold relative text-center my-16">
@@ -39,7 +37,7 @@ const SalesHistory = ({ sales }) => {
                                     <label>{index + 1 + firstItem}</label>
                                 </th>
                                 <td>{item?.product_name}</td>
-                                <td>{item?.sales_date}</td>
+                                <td>{item?.sales_date.toLocaleString()}</td>
                                 <th>$ {(item?.selling_price - item?.cost)?.toFixed(2)}</th>
                             </tr>
                         ))}

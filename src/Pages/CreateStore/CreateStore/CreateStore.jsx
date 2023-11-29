@@ -7,6 +7,7 @@ import useAxiosSecure from "../../../Hook/useAxiosSecure";
 import { useNavigate } from "react-router-dom";
 import { Helmet } from "react-helmet-async";
 import useAxiosPublic from "../../../Hook/useAxiosPublic";
+import { useQuery } from "@tanstack/react-query";
 
 const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
 const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
@@ -17,56 +18,77 @@ const CreateStore = () => {
     const navigate = useNavigate()
     const { user } = useContext(AuthContext)
     const { register, handleSubmit, formState: { errors }, reset } = useForm();
+    const { data: shops } = useQuery({
+        queryKey: ['shops'],
+        queryFn: async () => {
+            const res = await axiosSecure.get('/shops');
+            return res.data;
+        }
+    });
+    const isCreateShop = shops?.find(shop => shop?.shop_owner_email === user?.email)
+
+
 
 
     const onSubmit = async (data) => {
-        const imageFile = { image: data.shop_logo[0] };
-        const res = await axiosPublic.post(image_hosting_api, imageFile, {
-            headers: {
-                'Content-Type': 'multipart/form-data',
-            },
-        });
+        if (isCreateShop?.shop_owner_email === user?.email) {
+            Swal.fire({
+                position: "top-end",
+                icon: "success",
+                title: "You are already Create A Shop.",
+                showConfirmButton: false,
+                timer: 1500
+              });
+        }
+        else {
+            const imageFile = { image: data.shop_logo[0] };
+            const res = await axiosPublic.post(image_hosting_api, imageFile, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
 
-        console.log('ImgBB API response:', res.data);
+            console.log('ImgBB API response:', res.data);
 
-        if (res.data.success) {
-            console.log(res.data.data.display_url);
-            const createShopInfo = {
-                shop_name: data.shop_name,
-                shop_logo: res.data.data.display_url,
-                shop_owner_name: data.shop_owner_name,
-                shop_owner_email: data.shop_owner_email,
-                shop_info: data.shop_info,
-                shop_location: data.shop_location,
-                product_limit: 3
+            if (res.data.success) {
+                console.log(res.data.data.display_url);
+                const createShopInfo = {
+                    shop_name: data.shop_name,
+                    shop_logo: res.data.data.display_url,
+                    shop_owner_name: data.shop_owner_name,
+                    shop_owner_email: data.shop_owner_email,
+                    shop_info: data.shop_info,
+                    shop_location: data.shop_location,
+                    product_limit: 3
+                }
+                axiosPublic.post('/shops', createShopInfo)
+                    .then(res => {
+                        console.log(res.data);
+                        if (res.data.insertedId) {
+                            Swal.fire({
+                                position: "top-end",
+                                icon: "success",
+                                title: "Create store successful.",
+                                showConfirmButton: false,
+                                timer: 1500
+                            });
+                            reset()
+                        }
+                    })
+                    .catch(error => {
+                        console.log(error.massage);
+                    })
+
+                axiosSecure.patch(`/users/manager/${user?.email}`)
+                    .then(res => {
+                        console.log(res.data)
+                        if (res.data.modifiedCount > 0) {
+                            navigate('/dashboard/productManagement')
+                            window.location.reload()
+                        }
+                    })
+
             }
-            axiosPublic.post('/shops', createShopInfo)
-                .then(res => {
-                    console.log(res.data);
-                    if (res.data.insertedId) {
-                        Swal.fire({
-                            position: "top-end",
-                            icon: "success",
-                            title: "Create store successful.",
-                            showConfirmButton: false,
-                            timer: 1500
-                        });
-                        reset()
-                    }
-                })
-                .catch(error => {
-                    console.log(error.massage);
-                })
-
-            axiosSecure.patch(`/users/manager/${user?.email}`)
-                .then(res => {
-                    console.log(res.data)
-                    if (res.data.modifiedCount > 0) {
-                        window.location.reload()
-                        navigate('/dashboard' || "/")
-                    }
-                })
-
         }
     };
     return (
