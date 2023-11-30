@@ -77,7 +77,7 @@ const SignUp = () => {
                                                 showConfirmButton: false,
                                                 timer: 1500
                                             });
-                                            navigate('/createStore');
+                                            navigate('/createStore' || '/');
                                             window.location.reload()
                                         }
                                     })
