@@ -14,6 +14,7 @@ import { AuthContext } from "../../../AuthProvider/AuthProvider";
 import Swal from "sweetalert2";
 import { useQuery } from "@tanstack/react-query";
 import useAxiosSecure from "../../../Hook/useAxiosSecure";
+import { Helmet } from "react-helmet-async";
 
 const Dashboard = () => {
     const [isAdmin] = useAdmin();
@@ -55,6 +56,9 @@ const Dashboard = () => {
 
     return (
         <div>
+            <Helmet>
+                <title>ProVision | Dashboard </title>
+            </Helmet>
             <div className="max-w-[1600px] mx-auto lg:px-16 md:px-8 md:shadow-2xl">
                 <div className="drawer md:drawer-open">
                     <input id="my-drawer-2" type="checkbox" className="drawer-toggle" />

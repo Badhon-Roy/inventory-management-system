@@ -6,6 +6,7 @@ import CountDown from "../CountDown/CountDown";
 import Testimonial from "../Testimonial/Testimonial";
 import 'aos/dist/aos.css';
 import AOS from 'aos';
+import { Helmet } from "react-helmet-async";
 
 const Home = () => {
 
@@ -17,6 +18,9 @@ const Home = () => {
     }, []);
     return (
         <div >
+            <Helmet>
+                <title>ProVision | Home </title>
+            </Helmet>
             <img className="md:h-[700px] w-full object-cover " src="https://www.corporatevision-news.com/wp-content/uploads/2021/12/Inventory.jpg" alt="" />
             <About />
             <section className="md:mx-0 mx-4">

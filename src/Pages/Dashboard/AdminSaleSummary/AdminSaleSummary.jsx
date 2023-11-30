@@ -151,7 +151,7 @@ const AdminSaleSummary = () => {
             <div className="grid lg:grid-cols-3  grid-cols-1 md:gap-10 gap-5">
                 <div className="border bg-[#01cbd5] p-8 rounded-md flex justify-between items-center">
                     <h2 className="text-2xl font-bold">Total Income  <br />
-                        ${admin?.income}</h2>
+                        ${admin?.income || 0} </h2>
                     <img className="w-[60px]" src="https://static-00.iconduck.com/assets.00/sale-badge-icon-256x256-slz0mqy5.png" alt="" />
                 </div>
                 <div className="border bg-[#ffe05c] p-8 rounded-md flex justify-between items-center">

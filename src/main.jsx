@@ -31,6 +31,7 @@ import AdminRoute from './AdminRoute/AdminRoute';
 import ErrorPage from './ErrorPage/ErrorPage';
 import ForbiddenPage from './ForbiddenPage/ForbiddenPage';
 import ManagerRoute from './ManagerRoute/ManagerRoute';
+import About from './Pages/Home/About/About';
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
       {
         path: "/createStore",
         element: <PrivateRoute><CreateStore></CreateStore></PrivateRoute>
+      },
+      {
+        path : "/about",
+        element : <About></About>
       },
       {
         path: "/watchDemo",

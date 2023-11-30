@@ -1,0 +1,17 @@
+[
+    {
+        "name": "Admin",
+        "email": "sakib@gmail.com",
+        "role": "admin"
+    },
+    {
+        "name": "Admin",
+        "email": "sakib@gmail.com",
+        "role": "manager"
+    },
+    {
+        "name": "Admin",
+        "email": "sakib@gmail.com",
+        "role": "manager"
+    }
+]

@@ -7,6 +7,7 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 import useAxiosPublic from '../../Hook/useAxiosPublic';
 import useManager from '../../Hook/useManager';
 import useAdmin from '../../Hook/useAdmin';
+import { Helmet } from 'react-helmet-async';
 
 const Login = () => {
     const axiosPublic = useAxiosPublic();
@@ -41,10 +42,8 @@ const Login = () => {
                 axiosPublic.post('/users', userInfo)
                     .then(res => {
                         console.log(res.data);
+                        navigate('/createStore')
                         swal("Log in", "successful", "success")
-                        adminRefetch()
-                        managerRefetch()
-                        window.location.reload()
                     })
             })
             .catch(error => {
@@ -70,6 +69,9 @@ const Login = () => {
     }
     return (
         <div className="bg-base-200">
+             <Helmet>
+                <title>ProVision | Login </title>
+            </Helmet>
             <div className="lg:w-2/4 md:w-3/4 mx-auto py-32 px-4">
                 <div>
                     <h1 className="text-5xl font-bold text-center mb-8">Login now!</h1>

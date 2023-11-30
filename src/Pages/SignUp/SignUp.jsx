@@ -5,6 +5,10 @@ import { AuthContext } from '../../AuthProvider/AuthProvider';
 import { Link, useNavigate } from 'react-router-dom';
 import useAxiosPublic from '../../Hook/useAxiosPublic';
 import Swal from 'sweetalert2';
+import { Helmet } from 'react-helmet-async';
+
+const image_hosting_key = import.meta.env.VITE_IMAGE_HOSTING_KEY;
+const image_hosting_api = `https://api.imgbb.com/1/upload?key=${image_hosting_key}`;
 
 const SignUp = () => {
     const axiosPublic = useAxiosPublic()
@@ -12,64 +16,91 @@ const SignUp = () => {
     const [errorMassage, setErrorMassage] = useState('')
     const [showPassword, setShowPassword] = useState(false)
     const navigate = useNavigate()
-    const handleRegister = e => {
+    const handleRegister = async (e) => {
         e.preventDefault()
         const name = e.target.name.value;
-        const image = e.target.image.value;
         const email = e.target.email.value;
         const password = e.target.password.value;
+        const imageFile = e.target.image.files[0];
+        const formData = new FormData();
+        formData.append('image', imageFile);
+
+
+
+
+
+
         if (password.length < 6) {
             setErrorMassage("Password must be at least 6 characters");
             return;
         }
-        // else if (!/^(?=.*[a-z]).*$/.test(password)) {
-        //     setErrorMassage("Password must have at least one Lowercase Character.");
-        //     return;
-        // }
-        // else if(! /^(?=.*[A-Z]).*$/.test(password)){
-        //     setErrorMassage("Password must have at least one Uppercase Character.")
-        //     return;
-        // }
-        // else if(! /^(?=.*[~`!@#$%^&*()--+={}[\]|\\:;"'<>,.?/_₹]).*$/.test(password)){
-        //     setErrorMassage("Password must contain at least one Special Symbol.")
-        //     return;
-        // }
+        else if (!/^(?=.*[a-z]).*$/.test(password)) {
+            setErrorMassage("Password must have at least one Lowercase Character.");
+            return;
+        }
+        else if (! /^(?=.*[A-Z]).*$/.test(password)) {
+            setErrorMassage("Password must have at least one Uppercase Character.")
+            return;
+        }
+        else if(! /^(?=.*[~`!@#$%^&*()--+={}[\]|\\:;"'<>,.?/_₹]).*$/.test(password)){
+            setErrorMassage("Password must contain at least one Special Symbol.")
+            return;
+        }
         else {
             setErrorMassage('');
         }
 
-        createUser(email, password)
-            .then(res => {
-                console.log(res.user);
-                userProfile(name, image)
-                    .then(() => {
-                        const userInfo = { name: name,email: email}
-                        axiosPublic.post('/users', userInfo)
-                            .then(res => {
-                                if (res.data.insertedId) {
-                                    Swal.fire({
-                                        position: 'top-end',
-                                        icon: 'success',
-                                        title: 'User created successfully.',
-                                        showConfirmButton: false,
-                                        timer: 1500
-                                    });
-                                    navigate('/createStore');
-                                    window.location.reload()
-                                }
-                            })
-                    })
-                    .catch(error => {
-                        setErrorMassage(error.message)
-                    })
-            })
 
+        try {
+            const res = await axiosPublic.post(image_hosting_api, formData, {
+                headers: {
+                    'Content-Type': 'multipart/form-data',
+                },
+            });
+
+            if (res.data.success) {
+                const image = res.data.data.url;
+
+                createUser(email, password)
+                    .then(res => {
+                        console.log(res.user);
+                        userProfile(name, image)
+                            .then(() => {
+                                const userInfo = { name: name, email: email }
+                                axiosPublic.post('/users', userInfo)
+                                    .then(res => {
+                                        if (res.data.insertedId) {
+                                            Swal.fire({
+                                                position: 'top-end',
+                                                icon: 'success',
+                                                title: 'User created successfully.',
+                                                showConfirmButton: false,
+                                                timer: 1500
+                                            });
+                                            navigate('/createStore');
+                                            window.location.reload()
+                                        }
+                                    })
+                            })
+                            .catch(error => {
+                                setErrorMassage(error.code)
+                            });
+                    });
+            }
+        } catch (error) {
+            console.error('Image upload failed:', error);
+            setErrorMassage('Image upload failed. Please try again.');
+        }
     }
     const handleShowPassword = () => {
         setShowPassword(!showPassword)
     }
+    console.log(errorMassage);
     return (
         <div className="bg-base-200">
+             <Helmet>
+                <title>ProVision | Sign Up </title>
+            </Helmet>
             <div className="md:w-2/4 mx-auto py-20 px-4">
                 <div>
                     <h1 className="text-5xl font-bold text-center mb-8">Please Sign Up</h1>
@@ -82,13 +113,11 @@ const SignUp = () => {
                                     <span className="text-xl mt-2">Name</span>
                                 </label>
                                 <input type="text" name="name" placeholder="Your name" className="input input-bordered" required />
-                            </div>
+                            </div> <br />
 
-                            <div className="form-control">
-                                <label className="label">
-                                    <span className="text-xl mt-2">Image URL</span>
-                                </label>
-                                <input type="text" name="image" placeholder="image url" className="input input-bordered" />
+                            <div className="flex-1 space-y-2">
+                                <label className="text-xl">Profile Image:</label> <br />
+                                <input type="file" name="image" id="" />
                             </div>
 
                             <div className="form-control">

@@ -36,7 +36,7 @@ const Contact = () => {
                 </div>
                 <div data-aos="flip-right" className="cursor-pointer border hover:border-2 p-8 text-center shadow hover:border-[#ff792e] hover:shadow-2xl rounded-lg">
                     <span className="flex justify-center">
-                        <img className="w-[100px] mb-4" src="https://assets.stickpng.com/images/584856bce0bb315b0f7675ad.png" alt="" />
+                        <img className="w-[80px] mb-4" src="https://static.vecteezy.com/system/resources/previews/010/153/613/non_2x/email-and-mail-icon-sign-symbol-design-free-png.png" alt="" />
                     </span>
                     <h2 className="text-xl font-bold my-2">Email</h2>
                     <p>hello@provision.com <br /> Skype: hello.proVision</p>

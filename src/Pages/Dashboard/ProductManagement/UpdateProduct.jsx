@@ -55,7 +55,7 @@ const UpdateProduct = () => {
                     Swal.fire({
                         position: 'top-end',
                         icon: 'success',
-                        title: 'User created successfully.',
+                        title: 'Update Product Successful.',
                         showConfirmButton: false,
                         timer: 1500
                     });

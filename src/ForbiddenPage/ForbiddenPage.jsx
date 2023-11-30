@@ -8,7 +8,7 @@ const ForbiddenPage = () => {
             </div>
             <h2 className="text-4xl font-bold text-center">We are Sorry...</h2>
             <p className="text-center text-xl my-4">The page you are typing to access has restricted access. <br /> Please refer to your system administrator.</p>
-            <Link to='/' className="flex justify-center md:mb-8 mb-4">
+            <Link to='/' className="flex justify-center md:pb-8 pb-4">
                 <button className="BTN">Go Home</button>
             </Link>
         </div>

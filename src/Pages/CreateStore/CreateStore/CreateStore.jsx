@@ -92,9 +92,9 @@ const CreateStore = () => {
         }
     };
     return (
-        <div className="p-8 md:mx-0 mx-2 my-16 shadow-lg border">
+        <div className="md:px-16 px-4 md:mx-0 mx-2 md:py-32 py-8 shadow-lg border">
             <Helmet>
-                <title> Create Store </title>
+                <title>ProVision | Create Store </title>
             </Helmet>
             <h2 className="md:text-4xl text-2xl my-8 font-bold text-center underline">Create Store</h2>
 
